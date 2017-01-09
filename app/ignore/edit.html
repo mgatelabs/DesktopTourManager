@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Tour Manager - Available Tours</title>
+
+        <!-- Common -->
+
+        <link href="./css/bootstrap.min.css" rel="stylesheet">
+        <link href="./css/common.css" rel="stylesheet">
+        <script type="text/javascript">window.$ = window.jQuery = require('./js/jquery-3.1.1.min.js');</script>
+	    <script src="./js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./js/common.js"></script>
+        <script type="text/javascript" src="./js/rest.js"></script>
+
+        <!-- Page -->
+        <script type="text/javascript" src="./js/three.min.js"></script>
+        <script type="text/javascript" src="./js/mvrs/geom.js"></script>
+        <script type="text/javascript" src="./js/edit.js"></script>
+        <script type="text/javascript" src="./js/edit.preview.js"></script>
+
+    </head>
+    <body>
+
+        <!-- START PAGE -->
+        <input type="hidden" id="tourIdentifier" value=""/>
+
+        <div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist" id="tabList">
+                <li role="presentation" class="active"><a href="#tourInfo" aria-controls="tourInfo" role="tab" data-toggle="tab">Information</a></li>
+                <li role="presentation" id="roomEditLink"><a href="#roomEditor" aria-controls="roomEditor" role="tab" data-toggle="tab">Room Editor</a></li>
+                <li role="presentation" id="pointEditLink"><a href="#pointEditor" aria-controls="pointEditor" role="tab" data-toggle="tab">Point Editor</a></li>
+                <li role="presentation" id="presetEditLink"><a href="#presetEditor" aria-controls="presetEditor" role="tab" data-toggle="tab">Preset Editor</a></li>
+                <li role="presentation"><a href="#mediaEditor" aria-controls="mediaEditor" role="tab" data-toggle="tab">Images</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="tourInfo">
+
+                    <div style="padding:1em">
+                        <div class="input-group">
+                            <span class="input-group-addon">Name</span>
+                            <input type="text" class="form-control" id="tourName" placeholder="Display Name"/>
+                        </div>
+                    </div>
+
+                    <div style="padding:1em">
+                        <div class="well">
+
+                            <div class="btn-group" role="group" aria-label="...">
+                                <button type="button" class="btn btn-primary" id="save">Save</button>
+                                <button type="button" class="btn btn-danger" id="list">Return to List</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="roomEditor">
+
+                    <div class="row" style="margin-top:1em;">
+
+                        <div class="col-md-8">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Rooms</h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    <table class="table table-condensed table-striped" id="roomTable">
+                                        <thead>
+                                        <tr>
+                                            <th>Name (Identifier)</th>
+                                            <th>Content</th>
+                                            <th>Options</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <button type="button" class="btn btn-primary" id="newRoom">New Room</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Room</h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="form-group">
+                                        <label for="roomId">Name</label>
+                                        <input type="text" class="form-control" id="roomId" placeholder="Identifier"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="roomName">Name</label>
+                                        <input type="text" class="form-control" id="roomName" placeholder="Name"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="roomPreview">Preview</label>
+                                        <select class="form-control" id="roomPreview"></select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="roomContent">Background</label>
+                                        <select class="form-control" id="roomContent"></select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="roomPlaybackType">Background Type</label>
+                                        <select class="form-control" id="roomPlaybackType">
+                                            <option value="360">360 (Default)</option>
+                                            <!--
+                                            <option value="360lr">3D 360 Left Right</option>
+                                            <option value="360tb">3D 360 Top Bottom</option>
+                                            <option value="2d">2D Flat</option>
+                                            <option value="lr">3D Flat Left Right</option>
+                                            <option value="rl">3D Flat Right left</option>
+                                            <option value="tb">3D Flat Top Bottom</option>
+                                            <option value="180">2D 180</option>
+                                            <option value="180lr">3D 180 Left Right</option>
+                                            <option value="180tb">3D 180 Top Bottom</option>
+                                            <option value="ffd">2D Front Full Dome</option>
+                                            <option value="ffdlr">3D Front Full Dome Left Right</option>
+                                            <option value="ffdtb">3D Front Full Dome Top Bottom</option>
+                                            -->
+                                            <option value="cube">Cube (Not Ready)</option>
+                                            <!--
+                                            <option value="cubelr">3D Cube Left Right</option>
+                                            <option value="cubetb">3D Cube Top Bottom</option>
+                                            -->
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="pointEditor">
+
+                    <div class="row" style="margin-top:1em;">
+
+                        <div class="col-md-3">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Information</h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="form-group">
+                                        <label for="pointTitle">Title</label>
+                                        <input type="text" class="form-control" id="pointTitle" placeholder="Title"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pointType">Type</label>
+                                        <select class="form-control" id="pointType">
+                                            <option value="rot">Rotation (Default)</option>
+                                            <option value="point">Point (Advanced)</option>
+                                            <option value="action">Action (Script)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pointAction">Action</label>
+                                        <select class="form-control" id="pointAction">
+                                            <option value="nav">Navigate</option>
+                                            <option value="stop">Stop Tour</option>
+                                            <option value="exit">Exit VR</option>
+                                            <option value="play">Play</option>
+                                            <option value="noop">No Operation</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pointTo">To</label>
+                                        <select class="form-control" id="pointTo"></select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pointContent">Content</label>
+                                        <select class="form-control" id="pointContent"></select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pointPreset">Preset</label>
+                                        <select class="form-control" id="pointPreset"></select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pointFlow">Flow</label>
+                                        <select class="form-control" id="pointFlow">
+                                            <option value="stop">Stop</option>
+                                            <option value="next">Next</option>
+                                            <option value="repeat">Repeat</option>
+                                        </select>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label for="pointIcon">Icon</label>
+                                        <select class="form-control" id="pointIcon">
+                                            <option value="dot">Dot</option>
+                                            <option value="eye">Eye</option>
+                                            <option value="exit">Exit</option>
+                                            <option value="stop">Stop</option>
+                                            <option value="up">Up</option>
+                                            <option value="down">Down</option>
+                                            <option value="left">Left</option>
+                                            <option value="right">Right</option>
+                                            <option value="previous">Previous</option>
+                                            <option value="next">Next</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pointRecenter">Recenter</label>
+                                        <select class="form-control" id="pointRecenter">
+                                            <option value="true">True</option>
+                                            <option value="false">False</option>
+                                            <option value="apply">Apply</option>
+                                        </select>
+
+                                        <div class="well well-sm" style="margin-top:4px;">
+                                                True: World will re-center<br/>
+                                                False: World will stay the same<br/>
+                                                Apply: Point yaw will apply to next room
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pointSize">Size</label>
+                                        <input type="number" class="form-control" id="pointSize" placeholder="Size" min="0.25" max="10" step="0.1"/>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="pointTimer" title="Blank or 0 to Ignore.  Enter 1-600 to auto-activate action after X seconds">Timer (Seconds)</label>
+                                        <input type="number" class="form-control" id="pointTimer" placeholder="Timer" min="0" max="600" step="1"/>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-7">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Preview</h3>
+                                </div>
+                                <div class="panel-body" id="previewPanel" style="height:480px;margin:0;padding:0;">
+
+
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Info</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p>
+                                        <b>Yaw</b>: Red = 0&deg;, Green = 90&deg;, Blue = 180&deg;, White = -90&deg;
+                                    </p>
+                                    <p>
+                                        <b>Pitch</b>: Up = +&deg;, Down = -&deg;;
+                                    </p>
+                                    <p>
+                                        <b>Depth</b>: 1.5 = Standard Depth;
+                                    </p>
+
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Points</h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    <table class="table table-condensed table-striped" id="pointTable">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Type</th>
+                                            <th>Action</th>
+                                            <th>Options</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <button type="button" class="btn btn-primary" id="newPoint">New Point</button>
+
+                                        <button type="button" class="btn btn-info" id="previewPoints">Preview</button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-2">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">World</h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="form-group">
+                                        <label for="roomRotation">Rotation (Yaw)</label>
+                                        <input type="number" class="form-control" id="roomRotation" placeholder="Rotation" min="-180" max="180" step="1"/>
+
+                                        <p>
+                                            <button type="button" class="btn btn-info" id="previousRoom">Previous Room</button>
+                                        </p>
+                                        <p>
+                                            <button type="button" class="btn btn-info" id="nextRoom">Next Room</button>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Placement</h3>
+                                </div>
+                                <div class="panel-body">
+
+
+
+                                    <div class="form-group rot-based">
+                                        <label for="pointRotY">Yaw</label>
+                                        <input type="number" class="form-control rotBased" id="pointRotY" placeholder="Yaw" min="-180" max="180" step="0.1"/>
+                                    </div>
+
+                                    <div class="form-group rot-based">
+                                        <label for="pointRotP">Pitch</label>
+                                        <input type="number" class="form-control rotBased" id="pointRotP" placeholder="Pitch" min="-90" max="90" step="0.1"/>
+                                    </div>
+
+                                    <div class="form-group rot-based">
+                                        <label for="pointRotD">Depth</label>
+                                        <input type="number" class="form-control rotBased" id="pointRotD" placeholder="Depth" min="1.5" max="10" step="0.1"/>
+                                    </div>
+
+
+
+                                    <div class="form-group point-based">
+                                        <label for="pointX">X</label>
+                                        <input type="number" class="form-control rotBased" id="pointX" placeholder="X" min="-50" max="50" step="0.1"/>
+                                    </div>
+
+                                    <div class="form-group point-based">
+                                        <label for="pointY">Y</label>
+                                        <input type="number" class="form-control rotBased" id="pointY" placeholder="Y" min="-50" max="50" step="0.1"/>
+                                    </div>
+
+                                    <div class="form-group point-based">
+                                        <label for="pointZ">Z</label>
+                                        <input type="number" class="form-control rotBased" id="pointZ" placeholder="Z" min="-50" max="50" step="0.1"/>
+                                    </div>
+
+                                    <div class="form-group point-based">
+                                        <label for="pointXrot">X Rotation</label>
+                                        <input type="number" class="form-control rotBased" id="pointXrot" placeholder="X Rotation" min="-180" max="180" step="0.1"/>
+                                    </div>
+
+                                    <div class="form-group point-based">
+                                        <label for="pointYrot">Y Rotation</label>
+                                        <input type="number" class="form-control rotBased" id="pointYrot" placeholder="Y Rotation" min="-180" max="180" step="0.1"/>
+                                    </div>
+
+                                    <div class="form-group point-based">
+                                        <label for="pointZrot">Z Rotation</label>
+                                        <input type="number" class="form-control rotBased" id="pointZrot" placeholder="Z Rotation" min="-180" max="180" step="0.1"/>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                <!--
+                    Preset Editor
+                -->
+
+                <div role="tabpanel" class="tab-pane" id="presetEditor">
+
+                    <div class="panel panel-default" style="margin-top:1em;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Presets</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <table class="table table-condensed table-striped" id="presetTable">
+                                <thead>
+                                <tr>
+                                    <th>Name (Identifier)</th>
+                                    <th>Type</th>
+                                    <th>Options</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+
+                            <div class="btn-group" role="group" aria-label="...">
+                                <button type="button" class="btn btn-primary" id="newPreset">New Preset</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top:1em;">
+
+                        <div class="col-md-4">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Preset</h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="form-group">
+                                        <label for="presetId">Id</label>
+                                        <input type="text" class="form-control" id="presetId" placeholder="Identifier"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="presetProj">Type</label>
+                                        <select class="form-control" id="presetProj">
+                                            <option value="Plane">Plane</option>
+                                            <option value="Sphere">Sphere</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="presetMode">Mode</label>
+                                        <select class="form-control" id="presetMode">
+                                            <option value="2d">2D</option>
+                                            <option value="sbs">3D Left / Right</option>
+                                            <option value="ovr">3D Top / Bottom</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="presetFill">Fill</label>
+                                        <select class="form-control" id="presetFill">
+                                            <option value="adapt">Adaptive (Standard)</option>
+                                            <option value="stretch">Stretch</option>
+                                            <option value="fit">Fit (Deprecated)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="presetIpd">IPD</label>
+                                        <select class="form-control" id="presetIpd">
+                                            <option value="std">Standard</option>
+                                            <option value="zero">Zero</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="presetFlip">Flip</label>
+                                        <select class="form-control" id="presetFlip">
+                                            <option value="off">Off (Standard)</option>
+                                            <option value="on">On (Flipped)</option>
+                                            <option value="2d">Force 2D</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="presetFilter">Filter</label>
+                                        <select class="form-control" id="presetFilter">
+                                            <option value="off">Off (None)</option>
+                                            <option value="redcyan">3D Red/Cyan</option>
+                                            <option value="redblue">3D Red/Blue</option>
+                                            <option value="redgreen">3D Red/Green</option>
+                                        </select>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-8">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Attributes</h3>
+                                </div>
+                                <div class="panel-body" id="presetAttributes">
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!--
+                    Media Editor
+                -->
+
+                <div role="tabpanel" class="tab-pane" id="mediaEditor">
+
+                    <table class="table table-condensed table-striped" id="mediaTable">
+                        <thead>
+                        <tr>
+                            <th>File Name</th>
+                            <th>Display</th>
+                            <th>Preview</th>
+                            <th>Options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function(){
+                var identifier = require('electron').remote.getGlobal('sharedObject').tour.identifier;
+
+                $('#tourIdentifier').val(identifier);
+
+                MG.edit.start(identifier);
+
+                new MG.preview.Preview({container:$('#previewPanel')});
+
+                MG.preview.pointUpdate = function() {
+                    MG.preview.instance.onWindowResize();
+                    MG.preview.instance.prep();
+                    MG.preview.instance.points(MG.edit.currentRoom, MG.edit.currentPoint);
+                    MG.preview.instance.changeBackground(MG.edit.currentRoom, MG.edit.getBackgroundUrl());
+                    MG.preview.instance.update();
+                };
+
+                $('#tabList a[href="#pointEditor"]').on('shown.bs.tab', MG.preview.pointUpdate);
+
+                $('#tabList a[href="#roomEditor"]').on('shown.bs.tab', function(){
+                    MG.edit.updateRoomList();
+                    MG.edit.updatePointList();
+                });
+            });
+        </script>
+
+        <div class="modal fade" tabindex="-1" role="dialog" id="errorDialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Errors</h4>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END PAGE -->
+
+    </body>
+</html>

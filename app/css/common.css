@@ -1,0 +1,29 @@
+body {
+    overflow-x: hidden;
+}
+
+#wrap {
+	position: absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	overflow: hidden;
+}
+
+#wrap-menu {
+	position: absolute;
+	top:0;
+	left:0;
+	right:0;
+	height:50px;
+}
+
+#wrap-content {
+	position: absolute;
+	top:50px;
+	left:0;
+	right:0;
+	bottom:0;
+	overflow-y: scroll;
+}

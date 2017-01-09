@@ -1,0 +1,13 @@
+{
+  "name"    : "DesktopTourManager",
+  "description": "App to edit *.tour files for Mobile VR Station",
+  "author": "Michael Fuller",
+  "copyright": "© 2016, Michael Glen Fuller Jr",
+  "license": "BSD",
+  "version" : "0.1.0",
+  "main"    : "main.js",
+  "dependencies": {
+    "fs-jetpack": "^0.10.2",
+	"lwip": "^0.0.9"
+  }
+}

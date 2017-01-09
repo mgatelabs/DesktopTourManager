@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title><!-- build:title --></title>
+
+        <!-- Common -->
+
+        <link href="./css/bootstrap.min.css" rel="stylesheet">
+        <link href="./css/common.css" rel="stylesheet">
+        <script type="text/javascript">window.$ = window.jQuery = require('./js/jquery-3.1.1.min.js');</script>
+	    <script src="./js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./js/common.js"></script>
+        <script type="text/javascript" src="./js/rest.js"></script>
+
+        <!-- Page -->
+		
+        <!-- build:includes -->
+
+    </head>
+    <body>
+
+		<div id="wrap">
+	
+			<div id="wrap-menu">
+			
+			<nav class="navbar navbar-inverse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Tour Manager</a></li>
+					<li class="<!-- build:linklists -->"><a href="#" href2="list.html">Tours</a></li>
+					<li class="<!-- build:linknew -->"><a href="#" href2="new.html">New</a></li>
+					<li class="<!-- build:linksettings -->"><a href="#" href2="settings.html">Settings</a></li>
+				</ul>
+				<!-- build:buttons -->
+			</nav>
+			
+			</div>
+			<div id ="wrap-content">
+				<!-- build:content -->
+			</div>
+		</div>
+		
+        <div class="modal fade" tabindex="-1" role="dialog" id="errorDialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Errors</h4>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="modal fade" tabindex="-1" role="dialog" id="leaveDialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Leave?</h4>
+                    </div>
+                    <div class="modal-body">
+						Are you sure you want to leave?
+                    </div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" id="discardButton">Discard changes</button>
+					</div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,152 @@
+#roomWrap,
+#pointWrap {
+    position: absolute;
+    top:40px;
+    left:0;
+    right: 0;
+    bottom: 0;
+}
+
+#roomGrid {
+    position: absolute;
+    top:5px;
+    left:5px;
+    right: 340px;
+    bottom: 5px; 
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#roomControls {
+    position: absolute;
+    top:5px;
+    right:5px;
+    width: 330px;
+    bottom: 5px;
+}
+
+.roomItem {
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin:5px;
+}
+
+.roomItem.selected .roomTitle,
+.pointItem.selected .pointTitle {
+    background-color: gold;
+}
+
+.roomItem .roomTitle {
+    position: absolute;
+    left:10px;
+    right: 10px;
+    top:10px;
+    height: 20px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.roomItem:hover .roomTitle {
+    background-color: gray;
+}
+
+#selectBackground .modal-body,
+#selectRoom .modal-body {
+    height: 600px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#pointToolbar {
+    position: absolute;
+    top:10px;
+    left:5px;
+    right: 540px;
+    height: 40px; 
+    overflow: hidden;
+}
+
+#pointGrid {
+    position: absolute;
+    top:50px;
+    left:5px;
+    right: 540px;
+    bottom: 5px; 
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#previewPanel {
+    position: absolute;
+    top:5px;
+    right:5px;
+    width: 530px;
+    height: 320px; 
+    overflow-x: hidden;
+    overflow-y: hidden;
+    
+}
+
+#previewTools {
+    position: absolute;
+    top:330px;
+    right:5px;
+    width: 530px;
+    bottom: 5px; 
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.pointItem {
+    display: inline-block;
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin:5px;
+}
+
+.pointItem .pointTitle {
+    position: absolute;
+    left:10px;
+    right: 10px;
+    top:10px;
+    height: 20px;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.pointItem:hover .pointTitle {
+    background-color: gray;
+}
+
+.pointAction {
+    position: absolute;
+    left:8px;
+    bottom: 8px;
+    width: 24px;
+    height: 24px;
+}
+
+.pointAction.play {
+    background:url(../images/action_play.png) center center no-repeat;
+}
+
+.pointAction.stop {
+    background:url(../images/action_stop.png) center center no-repeat;
+}
+
+.pointAction.exit {
+    background:url(../images/action_exit.png) center center no-repeat;
+}
+
+.pointAction.nav {
+    background:url(../images/action_nav.png) center center no-repeat;
+}
+
+.pointAction.noop {
+    background:url(../images/action_noop.png) center center no-repeat;
+}

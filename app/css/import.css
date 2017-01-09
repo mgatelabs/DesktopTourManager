@@ -1,0 +1,11 @@
+table td {
+    vertical-align: top;
+}
+
+.errorDest div {
+    padding: 4px;
+}
+
+input[type=text] {
+    width:100%;
+}

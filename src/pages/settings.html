@@ -1,0 +1,77 @@
+<!-- build:title -->Tour Manager<!-- /build:title -->
+
+<!-- build:linksettings -->active<!-- /build:linksettings -->
+
+<!-- build:includes -->
+<script type="text/javascript" src="./js/settings.js"></script>
+<!-- /build:includes -->
+
+<!-- build:buttons -->
+<!--
+<button type="button" class="btn btn-primary navbar-btn" id="save">Cancel</button>
+-->
+<!-- /build:buttons -->
+
+<!-- build:content -->
+<div>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist" id="tabList">
+		<li role="presentation"><a href="#paths" aria-controls="paths" role="tab" data-toggle="tab">Paths</a></li>
+		<li role="presentation"><a href="#expressions" aria-controls="expressions" role="tab" data-toggle="tab">Expressions</a></li>
+	</ul>
+	<!-- Tab panes -->
+	<div class="tab-content">
+		
+		<div role="tabpanel" class="tab-pane active" id="paths">
+
+			<div style="padding:1em">
+				<div class="input-group" style="margin-bottom:10px;">
+					<span class="input-group-addon">Tours Location</span>
+					<input type="text" class="form-control" id="settingPathsTours" readonly placeholder="Path to storage folder"/>
+					<div class="input-group-btn">
+						<button type="button" class="btn" id="pickToursLocation">Change</button>
+					</div>
+				</div>
+
+				<div class="alert alert-info" role="alert">
+
+					Please choose a location to save and read your tours from.
+
+				</div>
+			</div>
+
+		</div>
+
+
+		<div role="tabpanel" class="tab-pane" id="expressions">
+
+			<div style="padding:1em">
+				<div class="input-group" style="margin-bottom:10px;">
+					<span class="input-group-addon">Background</span>
+					<input type="text" class="form-control" id="settingExpBackground" placeholder="RegEx for background images"/>
+					<div class="input-group-btn">
+						<button type="button" class="btn" id="updateSettingExpBackground">Update</button>
+					</div>
+				</div>
+
+				<div class="input-group" style="margin-bottom:10px;">
+					<span class="input-group-addon">Preview</span>
+					<input type="text" class="form-control" id="settingExpPreview" placeholder="RegEx for preview images"/>
+					<div class="input-group-btn">
+						<button type="button" class="btn" id="updateSettingExpPreview">Update</button>
+					</div>
+				</div>
+
+				<div class="alert alert-info" role="alert">
+
+					We use regular expression to help link backgrounds to their previews.  We don’t want to impose an exact format so you’re free to modify our expressions used to extract the background key, content and preview information.
+
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+</div>
+<!-- /build:content -->
