@@ -13,3 +13,8 @@ This is still under development, so things may not always work.
 # Issues
 
 1. This uses a image modification library to process images.  The process to install this module was messy and not fun.  The process on the mac was not painful at all, but I have all development tools installed.
+
+# Tips
+
+To change the mac icon, edit the images in ./build/icon.iconset.  From the build folder run the following command:
+iconutil -c icns icon.iconset
