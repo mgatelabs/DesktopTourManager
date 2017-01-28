@@ -26,7 +26,7 @@
         $('#pickToursLocation').click(function(){
             var data = REST.sync('pickToursLocation', {});
             if (data.code == 'OK') {
-                //ns.load();
+                $('#settingPathsTours').val(data.dir);
             }
         });
     });

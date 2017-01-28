@@ -26,6 +26,9 @@ var context = {
     backRegEx: '^(?:([a-zA-Z0-9-~]+))\\.(png|jpg|jpeg)$',
     previewRegEx: '^(?:([a-zA-Z0-9-~]+))_1\\.(png|jpg|jpeg)$'
   },
+  recent: [
+
+  ],
   selected: undefined
 };
 
@@ -52,15 +55,21 @@ var commonRegEx = {
  */
 var methods = {
   writeSettings: function(){
-    var data = {
+    var i, data = {
       paths: {
         tours: context.paths.tours
       },
       expressions: {
         backRegEx: context.expressions.backRegEx,
         previewRegEx: context.expressions.previewRegEx
-      }
+      },
+      recent: [
+
+      ]
     };
+    for (i = 0; i < context.recent.length && i < 5; i++) {
+      data.recent.push(context.recent[i]);
+    }
     fs.writeFileSync(context.paths.settings, JSON.stringify(data), {encoding: 'utf8'});
   },
   fileExistsIn: function(path, file) {
@@ -171,7 +180,7 @@ var methods = {
 };
 
 (function(){
-  var settings = methods.readJson(context.paths.settings);
+  var i, settings = methods.readJson(context.paths.settings);
   if (settings) {
     if (settings.paths && settings.paths.tours) {
       context.paths.tours = settings.paths.tours;
@@ -182,6 +191,12 @@ var methods = {
     if (settings.expressions && settings.expressions.previewRegEx) {
       context.expressions.previewRegEx = settings.expressions.previewRegEx;
     }
+    if (settings.recent && settings.recent.length > 0) {
+        context.recent = [];
+        for (i = 0; i < settings.recent.length && i < 5; i++) {
+          context.recent.push(settings.recent[i]);
+        }
+    }
   }
 }());
 
@@ -189,9 +204,14 @@ var methods = {
  * Fake Rest Methods
  */
 var restMethods = {
-	
+	/** Dasboards **/
+  getRecents: function() {
+    var result = {recents: context.recent};
+    result.code = 'OK';
+    return result;
+  },
+
 	/** Tour Management **/
-	
   getTours: function() {
     var result = {paths: {tours: context.paths.tours || ''}};
     if (!context.paths.tours) {
@@ -262,7 +282,7 @@ var restMethods = {
     for (i = result.backgrounds.length - 1; i>= 0; i--) {
       file = result.backgrounds[i];
       if ((!file.content || !file.preview)) {
-        result.background.splice(i, 1);
+        result.backgrounds.splice(i, 1);
       }
     }
 
@@ -272,6 +292,21 @@ var restMethods = {
     result.index.preview = false;
     if (full) {
       result.index.json = methods.readJson(infoFile);
+    }
+
+    if (full) {
+      var display = result.definition.json.display || tour;
+      for (i = 0; i < context.recent.length; i++) {
+        if (context.recent[i].tourId == tour) {
+          context.recent.splice(i, 1);
+          break;
+        }
+      }
+      context.recent.splice(0,0, {display: display, tourId: tour});
+      if (context.recent.length > 5) {
+        context.recent.splice(5, context.recent.length - 5);
+      }
+      methods.writeSettings();
     }
 
     return result;
@@ -291,6 +326,20 @@ var restMethods = {
       fs.writeFileSync(definitionFile, definition, {encoding: 'utf8'});
 
       fs.writeFileSync(infoFile, info, {encoding: 'utf8'});
+
+      var display = definition.display || tour;
+      for (i = 0; i < context.recent.length; i++) {
+        if (context.recent[i].tourId == tour) {
+          context.recent.splice(i, 1);
+          break;
+        }
+      }
+      context.recent.splice(0,0, {display: display, tourId: tour});
+      if (context.recent.length > 5) {
+        context.recent.splice(5, context.recent.length - 5);
+      }
+      methods.writeSettings();
+
     } catch (ex) {
       result.code = 'FAIL';
       result.msgs.push(ex);
@@ -346,9 +395,9 @@ var restMethods = {
         var definitionFile = context.paths.tours + tour + ".json";
         var infoFile = context.paths.tours + tour + context.paths.sep + "index.tour.json";
 
-        console.log(fs.existsSync(tourFolder));
-        console.log(fs.existsSync(definitionFile));
-        console.log(fs.existsSync(infoFile));
+        //console.log(fs.existsSync(tourFolder));
+        //console.log(fs.existsSync(definitionFile));
+        //console.log(fs.existsSync(infoFile));
 
         if (fs.existsSync(definitionFile)) {
           result.code = 'FAIL';
@@ -523,6 +572,7 @@ var restMethods = {
       }
 
       context.paths.tours = dir;
+      result.dir = dir;
 
       methods.writeSettings();
       methods.loadFiles();
@@ -555,7 +605,7 @@ function createWindow () {
 
   // and load the index.html of the app.
   win.loadURL(url.format({
-    pathname: path.join(__dirname, 'list.html'),
+    pathname: path.join(__dirname, !context.paths.tours ? 'welcome.htm' : 'dashboard.html'),
     protocol: 'file:',
     slashes: true
   }))

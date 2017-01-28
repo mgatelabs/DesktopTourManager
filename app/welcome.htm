@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title><!-- build:title --></title>
+        <title>Tour Manager</title>
 
         <!-- Common -->
 
@@ -17,32 +17,35 @@
         <script type="text/javascript" src="./js/rest.js"></script>
 
         <!-- Page -->
-		
-        <!-- build:includes -->
+
+        <script type="text/javascript" src="./js/welcome.js"></script>
 
     </head>
     <body>
 
-		<div id="wrap">
-	
-			<div id="wrap-menu">
-			
-			<nav class="navbar navbar-inverse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Tour Manager</a></li>
-                    <li class="<!-- build:linkdash -->"><a href="#" href2="dashboard.html">Dashboard</a></li>
-					<li class="<!-- build:linklists -->"><a href="#" href2="list.html">Tours</a></li>
-					<li class="<!-- build:linknew -->"><a href="#" href2="new.html">New</a></li>
-					<li class="<!-- build:linksettings -->"><a href="#" href2="settings.html">Settings</a></li>
-				</ul>
-				<!-- build:buttons -->
-			</nav>
-			
-			</div>
-			<div id ="wrap-content">
-				<!-- build:content -->
-			</div>
+				
+
+		<div class="jumbotron" style="margin:2em auto 0 auto;width:80%;padding:1em;border-radius: 5px;">
+		  <h1>Welcome</h1>
+		  <p>
+		  To the Mobile VR Station tour manager.  With this application you can create and edit basic 360 tours with static images and audio/visual content.
+		  </p>
+		  <p>To get started please choose a location where we can save to.</p>
+		  <ul>
+			<li>Please make sure you have:
+			<ul>
+				<li>Enough free space to store tours</li>
+				<li>Permission to read and write</li>
+			</ul>
+			</li>
+		  </ul>
+		  <p><a class="btn btn-primary btn-lg"  id="pickToursLocation" href="#" role="button">Set Location</a></p>
+		  
+		  <p style="font-style:italic;font-size:11px;">
+			You can change the location at a later time by accessing the setting menu.
+		  </p>
 		</div>
+
 		
         <div class="modal fade" tabindex="-1" role="dialog" id="errorDialog">
             <div class="modal-dialog modal-lg" role="document">

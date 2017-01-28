@@ -1,13 +1,21 @@
 {
-  "name"    : "DesktopTourManager",
+  "name": "DesktopTourManager",
   "description": "App to edit *.tour files for Mobile VR Station",
   "author": "Michael Fuller",
-  "copyright": "© 2016, Michael Glen Fuller Jr",
+  "copyright": "© 2017, Michael Glen Fuller Jr",
   "license": "BSD",
-  "version" : "0.1.0",
-  "main"    : "main.js",
+  "version": "0.1.0",
+  "main": "main.js",
   "dependencies": {
-    "fs-jetpack": "^0.10.2",
-	"lwip": "^0.0.9"
+    "lwip": "^0.0.9"
+  },
+  "devDependencies": {
+    "electron": "^1.4.15",
+    "electron-packager": "^8.5.1"
+  },
+  "scripts": {
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=../build/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=../build/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Desktop Tour Manager\"",
+    "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=../build/icon.iconset/icon_512x512@2x.png --prune=true --out=release-builds"
   }
 }
