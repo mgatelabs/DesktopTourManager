@@ -33,6 +33,12 @@
 			}
 			window.location = ref.attr('href2');
 		});
+
+        $('.open-in-browser').click(function() {
+           event.preventDefault();
+           REST.sync('openUrl', {url:$(this).attr('url')});
+        });
+
 	});
 	
 	

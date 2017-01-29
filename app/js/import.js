@@ -32,6 +32,10 @@
                 input = $('<input class="hideMe" type="radio"/>').attr('name', 'item' + i).val('BACK').appendTo(td).prop('disabled', !file.backgroundable);
                 
                 td = $('<td></td>').css('text-align','center').appendTo(tr);
+                input = $('<input class="hideMe" type="radio" style="margin-left:1em;"/>').attr('name', 'item' + i).val('FIX').appendTo(td).prop('disabled', !file.fixable);
+                
+
+                td = $('<td></td>').css('text-align','center').appendTo(tr);
                 input = $('<input class="hideMe" type="radio" style="margin-left:1em;"/>').attr('name', 'item' + i).val('COPY').appendTo(td).prop('disabled', !file.playable);
                 
                 td = $('<td></td>').css('text-align','center').appendTo(tr);
@@ -63,6 +67,9 @@
                 case 'BACK': {
                     tempCommands.push({index:i, type:'BACK', filename:item.filename, target:target, ext: 'jpg'});
                     tempCommands.push({index:i, type:'PREVIEW', filename:item.filename, target:target+'_1', ext: 'jpg'});
+                } break;
+                case 'FIX': {
+                    tempCommands.push({index:i, type:'FIX', filename:item.filename, target:target, ext: 'jpg'});
                 } break;
                 case 'COPY': {
                     tempCommands.push({index:i, type:'COPY', filename:item.filename, target:target, ext: item.ext});

@@ -1,9 +1,10 @@
-const {app, BrowserWindow, dialog} = require('electron')
-const path = require('path')
-const url = require('url')
-var ipc = require('electron').ipcMain; //require('ipc');
+const {app, BrowserWindow, dialog} = require('electron');
+const {shell} = require('electron');
+const path = require('path');
+const url = require('url');
+var ipc = require('electron').ipcMain;
 
-//var ipcMain = require('electron').ipcMain
+
 var fs = require('fs') // To read the directory listing
 
 // In the main process.
@@ -47,6 +48,7 @@ var commonRegEx = {
   mediaFileName: /^[a-zA-Z0-9-_~]+\.(png|jpg|jpeg|mp4|sbs|m4v|mov|mp3|stream|mpo)$/,
   backgroundFileExtensions: /^(png|jpg|jpeg)$/,
   playableFileExtensions: /^(png|jpg|jpeg|mp4|sbs|m4v|mov|mp3|stream|mpo)$/,
+  fixFileExtensions: /^(png|jpg|jpeg)$/,
   extractFileName: /^(?:([a-zA-Z0-9-_~]+))\.(?:([a-zA-Z4]{3,6}))$/
 };
 
@@ -155,15 +157,24 @@ var methods = {
 
       var w = image.width(), h = image.height();
 
-      if (forceSize) {
+      if (forceSize === true) {
         w = maxWidth;
         h = maxHeight;
-      } else {
+      } else if (forceSize === false) {
         if (w > maxWidth) {
           w = 4096;
         }
         
         if (h > maxHeight) {
+          h = 4096;
+        }
+      } else {
+        if (w > maxWidth) {
+          h = (h * 4096) / w;
+          w = 4096;
+        }
+        if (h > maxHeight) {
+          w = (w * 4096) / h;
           h = 4096;
         }
       }
@@ -477,6 +488,18 @@ var restMethods = {
         });
 
       } break;
+      case 'FIX': {
+        methods.resizeImage(sourcePath, targetPath, 4096, 4096, 'FIX', 85, function(err){
+          var result = {code: 'OK', msgs: []};
+          if (err) {
+            result.code = 'FAIL';
+            result.msgs.push(err);
+          } else {
+            result.msgs.push('Resized file from ' + sourcePath + ' to ' + targetPath);
+          }
+          callback(result);
+        });
+      } break;
       case 'PREVIEW': {
 
         methods.resizeImage(sourcePath, targetPath, 256, 256, true, 55, function(err){
@@ -524,7 +547,7 @@ var restMethods = {
               if (ext == 'jpeg') {
                 ext = 'jpg';
               }
-              result.files.push({filename: file, name: nameMatch[1], ext: ext, playable: ext.match(commonRegEx.playableFileExtensions) ? true : false, backgroundable: ext.match(commonRegEx.backgroundFileExtensions) ? true : false});
+              result.files.push({filename: file, name: nameMatch[1], ext: ext, fixable: ext.match(commonRegEx.fixFileExtensions) ? true : false, playable: ext.match(commonRegEx.playableFileExtensions) ? true : false, backgroundable: ext.match(commonRegEx.backgroundFileExtensions) ? true : false});
             }
           }
         }
@@ -590,7 +613,18 @@ var restMethods = {
     setInterval(function(){
       callback({code:'OK'});
     }, 2000);
+  },
+
+  /****************************************************************************
+   *  TEST
+   * *************************************************************************/
+
+  openUrl: function(option, callback){
+    var result = {code: 'OK', msgs: []};
+    shell.openExternal(option.url, {active:true});
+    return result;
   }
+
 };
 
 methods.loadFiles();

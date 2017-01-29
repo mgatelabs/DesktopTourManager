@@ -13,7 +13,7 @@
 
             newTour.removeClass('btn-primary').addClass('btn-default');
 
-            a = $('<a class="btn btn-default btn-lg viewTour" href="#" role="button"></a>').text(data.recents[0].display).attr('tourId', data.recents[0].tourId).insertBefore(newTour);
+            a = $('<a class="btn btn-default btn-lg viewTour" href="#" role="button"></a>').attr('title','Edit last modified').text('Edit (' + data.recents[0].display + ')').attr('tourId', data.recents[0].tourId).insertBefore(newTour);
             a.addClass('btn-primary');
             a.click(function(){
                 var ref = $(this);

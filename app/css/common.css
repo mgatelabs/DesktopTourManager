@@ -27,3 +27,24 @@ body {
 	bottom:0;
 	overflow-y: scroll;
 }
+
+.gen-icon {
+	margin: 0 8px;
+	width: 48px;
+	height: 48px;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.fb-icon {
+	background-image: url(../images/fb.png);
+}
+
+.tw-icon {
+	background-image: url(../images/tw.png);
+}
+
+.yt-icon {
+	background-image: url(../images/yt.png);
+}
