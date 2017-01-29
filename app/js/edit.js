@@ -11,7 +11,7 @@
           type: 'I',
           min: 10,
           max: 100,
-          def: 25
+          def: 25, title:'The distance from the camera.'
         }, {
           name: 'Offset X',
           key: 'offx',
@@ -19,7 +19,7 @@
           min: -25,
           max: 25,
           def: 0,
-          step: 0.5
+          step: 0.5, title:'Shift the plane left or right.'
         }, {
           name: 'Offset Y',
           key: 'offy',
@@ -27,21 +27,21 @@
           min: -25,
           max: 25,
           def: 0,
-          step: 0.5
+          step: 0.5, title:'Shift the plane up or down.'
         }, {
           name: 'Width',
           key: 'wi',
           type: 'I',
           min: 10,
           max: 100,
-          def: 50
+          def: 50, title:'Should equal height.'
         }, {
           name: 'Height',
           key: 'he',
           type: 'I',
           min: 10,
           max: 100,
-          def: 50
+          def: 50, title:'Should equal width.'
         }, {
           name: 'Scale',
           key: 'sc',
@@ -49,7 +49,7 @@
           min: 1,
           max: 10,
           def: 1,
-          step: 0.25
+          step: 0.25, title:'Used to make everything larger or smaller.'
         }, {
            name: 'Max Adapt Width',
            key: 'maw',
@@ -57,7 +57,7 @@
            min: 0.10,
            max: 1.00,
            def: 1.0,
-           step: 0.01
+           step: 0.01, title:'Because the width/height should match to maintain aspect ratios, you can use this to restrict the width, without actually changing the width.'
          }, {
             name: 'Max Adapt Height',
             key: 'mah',
@@ -65,7 +65,7 @@
             min: 0.10,
             max: 1.00,
             def: 1.0,
-            step: 0.01
+            step: 0.01, title:'Because the width/height should match to maintain aspect ratios, you can use this to restrict the height, without actually changing the height.'
           }],
         // Skip these for now, will implement later
         Curved: [
@@ -1443,6 +1443,9 @@
                 item = attributes[i];
                 fg = $('<div class="form-group preset-based"></div>').appendTo(presetAttributes);
                 lab = $('<label></label>').attr('for', 'preset_' + item.key ).text(item.name).appendTo(fg);
+                if (item.title) {
+                    lab.attr('title', item.title);
+                }
                 inp = $('<input type="number" class="form-control presetBased"/>').attr('id', 'preset_' + item.key).attr('key', item.key).attr('min', item.min).attr('max', item.max).val(ns.currentPreset.settings[item.key] || item.def).attr('step', item.step || 1).appendTo(fg);
             }
 
