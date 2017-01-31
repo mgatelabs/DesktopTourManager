@@ -11,7 +11,8 @@
   },
   "devDependencies": {
     "electron": "^1.4.15",
-    "electron-packager": "^8.5.1"
+    "electron-packager": "^8.5.1",
+    "electron-default-menu": "^1.0.0"
   },
   "scripts": {
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=../build/icon.icns --prune=true --out=release-builds",
