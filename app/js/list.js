@@ -45,17 +45,19 @@
             for (i = 0; i < data.items.length; i++) {
                 item = data.items[i];
                 tr = $('<tr></tr>').attr('i', i).appendTo( ns.listBody);
+                td = $('<td></td>').appendTo(tr);
+                
+                link = $('<button type="button" style="margin-right:4px;" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'EDIT').appendTo(td);
+                link.attr('identifier', item.identifier);
+                link.attr('title', i18next.t('page.list.edit', {'name': item.name}));
+
                 $('<td></td>').text(item.name).appendTo(tr);
                 $('<td></td>').text(item.identifier).appendTo(tr);
                 td = $('<td></td>').appendTo(tr);
 
-                link = $('<button type="button" style="margin-right:4px;" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'EDIT').appendTo(td);
-                link.attr('identifier', item.identifier);
-                link.attr('title', 'Edit Tour');
-
                 link = $('<button type="button" style="margin-right:4px;" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'DELETE').appendTo(td);
                 link.attr('identifier', item.identifier);
-                link.attr('title', 'Delete Tour');
+                link.attr('title', i18next.t('page.list.delete', {'name': item.name}));
             }
         } else {
             MG.common.errorHandler(data);

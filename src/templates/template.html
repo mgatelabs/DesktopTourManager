@@ -12,7 +12,8 @@
         <link href="./css/bootstrap.min.css" rel="stylesheet">
         <link href="./css/common.css" rel="stylesheet">
         <script type="text/javascript">window.$ = window.jQuery = require('./js/jquery-3.1.1.min.js');</script>
-	    <script src="./js/bootstrap.min.js"></script>
+	    <script type="text/javascript" src="./js/lang.js"></script>
+        <script src="./js/bootstrap.min.js"></script>
         <script type="text/javascript" src="./js/common.js"></script>
         <script type="text/javascript" src="./js/rest.js"></script>
 
@@ -29,16 +30,19 @@
 			
 			<nav class="navbar navbar-inverse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Tour Manager</a></li>
-                    <li class="<!-- build:linkdash -->"><a href="#" href2="dashboard.html"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>&nbsp;Dashboard</a></li>
-					<li class="<!-- build:linklists -->"><a href="#" href2="list.html"><span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;Tours</a></li>
-					<li class="<!-- build:linknew -->"><a href="#" href2="new.html"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;New</a></li>
-					<li class="<!-- build:linksettings -->"><a href="#" href2="settings.html"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;Settings</a></li>
+                    <li class="<!-- build:linkdash -->">
+                        <a href="#" href2="dashboard.html">
+                            <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>&nbsp;<span i18n-text="header.dashboard"><!--Dashboard--></span>
+                            </a>
+                    </li>
+                    <li class="<!-- build:linklists -->"><a href="#" href2="list.html"><span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;<span i18n-text="header.tours"><!--Tours--></span></a></li>
+                    <li class="<!-- build:linknew -->"><a href="#" href2="new.html"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;<span i18n-text="header.new"><!--New--></span></a></li>
+                    <li class="<!-- build:linksettings -->"><a href="#" href2="settings.html"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;<span i18n-text="header.settings"><!--Settings--></span></a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" class="open-in-browser gen-icon fb-icon" title="View Facebook Page" url="https://www.facebook.com/mobilevrstation/"></a></li>
-                    <li><a href="#" class="open-in-browser gen-icon yt-icon" title="View Help Videos" url="https://www.youtube.com/playlist?list=PL2oqxM6QDDpinDsNz-OIxOrtjFA9szk6h"></a></li>
-                    <li><a href="#" class="open-in-browser gen-icon tw-icon" title="View Twitter Feed" url="https://twitter.com/mgatelabs"></a></li>
+                    <li><a href="#" class="open-in-browser gen-icon fb-icon" i18n-title="header.vfb" url="https://www.facebook.com/mobilevrstation/"></a></li>
+                    <li><a href="#" class="open-in-browser gen-icon yt-icon" i18n-title="header.vhb" url="https://www.youtube.com/playlist?list=PL2oqxM6QDDpinDsNz-OIxOrtjFA9szk6h"></a></li>
+                    <li><a href="#" class="open-in-browser gen-icon tw-icon" i18n-title="header.vtw" url="https://twitter.com/mgatelabs"></a></li>
                     <li>&nbsp;&nbsp;&nbsp;</li>
 				</ul>
 				<!-- build:buttons -->

@@ -19,15 +19,15 @@
 	<div>
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist" id="tabList">
-			<li role="presentation"><a href="#tourInfo" aria-controls="tourInfo" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-exclamation-sign">&nbsp;Information</a></li>
-			<li role="presentation" class="active" id="roomsLink"><a href="#rooms" aria-controls="rooms" role="tab" data-toggle="tab" title="Create and edit rooms.  Rooms are where you tour can take you.">
-				<span class="glyphicon glyphicon-th">&nbsp;Rooms
+			<li role="presentation" i18n-title="page.detail.tabs.infoTitle"><a href="#tourInfo" aria-controls="tourInfo" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-exclamation-sign">&nbsp;<span i18n-text="page.detail.tabs.info"><!--Information--></span></a></li>
+			<li role="presentation" class="active" id="roomsLink" i18n-title="page.detail.tabs.roomTitle"><a href="#rooms" aria-controls="rooms" role="tab" data-toggle="tab">
+				<span class="glyphicon glyphicon-th">&nbsp;<span i18n-text="page.detail.tabs.rooms"><!--Rooms--></span>
 			</a></li>
-			<li role="presentation" id="pointEditLink"><a href="#pointEditor" aria-controls="pointEditor" role="tab" data-toggle="tab" title="Create and edit points.  Points are what you can interact with.">
-				<span class="glyphicon glyphicon-map-marker"></span>&nbsp;Point Editor
+			<li role="presentation" id="pointEditLink" i18n-title="page.detail.tabs.pointTitle"><a href="#pointEditor" aria-controls="pointEditor" role="tab" data-toggle="tab">
+				<span class="glyphicon glyphicon-map-marker"></span>&nbsp;<span i18n-text="page.detail.tabs.points"><!--Points--></span>
 			</a></li>
-			<li role="presentation" id="presetEditLink" title="Create and edit presets.  Presets define how content should be displayed."><a href="#presetEditor" aria-controls="presetEditor" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-blackboard">&nbsp;Presets</a></li>
-			<li role="presentation"><a href="#fileEditor" aria-controls="fileEditor" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-file">&nbsp;Files</a></li>
+			<li role="presentation" id="presetEditLink" i18n-title="page.detail.tabs.presetTitle"><a href="#presetEditor" aria-controls="presetEditor" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-blackboard">&nbsp;<span i18n-text="page.detail.tabs.presets"><!--Presets--></span></a></li>
+			<li role="presentation" i18n-title="page.detail.tabs.fileTitle"><a href="#fileEditor" aria-controls="fileEditor" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-file">&nbsp;<span i18n-text="page.detail.tabs.files"><!--Files--></span></a></li>
 		</ul>
 		<!-- Tab panes -->
 		<div class="tab-content">
@@ -60,48 +60,48 @@
 
 								<div class="btn-toolbar">
 									<div class="btn-group" role="group" aria-label="Quicker Actions">
-										<button title="Automaticlaly add missing rooms.  If you just added more files, hit this to fill in new content." mode="FILL" type="button" class="btn btn-default roomEditAction roomGlobalAction"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></button>
+										<button i18n-title="page.detail.action.addMissing" mode="FILL" type="button" class="btn btn-default roomEditAction roomGlobalAction"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></button>
 									</div>
 									<div class="btn-group" role="group" aria-label="Quick Actions">
-										<button title="Refresh the information below" mode="REFRESH" type="button" class="btn btn-default roomEditAction roomGlobalAction"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
-										<button title="Automatically add exits to every room" mode="EXIT" type="button" class="btn btn-default roomEditAction roomGlobalAction"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></button>
+										<button i18n-title="page.detail.action.refreshRooms" mode="REFRESH" type="button" class="btn btn-default roomEditAction roomGlobalAction"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+										<button i18n-title="page.detail.action.addExits" mode="EXIT" type="button" class="btn btn-default roomEditAction roomGlobalAction"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></button>
 									</div>
 									<div class="btn-group" role="group" aria-label="Local Actions">
-										<button title="Add a new empty room" mode="NEW" type="button" class="btn btn-default roomEditAction roomGlobalAction"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+										<button i18n-title="page.detail.action.addRoom" mode="NEW" type="button" class="btn btn-default roomEditAction roomGlobalAction"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
 									</div>
 									<div class="btn-group" role="group" aria-label="Room Actions">
-										<button title="Delete the current room" mode="DELETE" type="button" class="btn btn-danger roomEditAction"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-										<button title="Move the current room up" mode="UP" type="button" class="btn btn-default roomEditAction"><span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></button>
-										<button title="Move the current room down" mode="DOWN" type="button" class="btn btn-default roomEditAction"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></button>
+										<button i18n-title="page.detail.action.deleteRoom" mode="DELETE" type="button" class="btn btn-danger roomEditAction"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+										<button i18n-title="page.detail.action.upRoom" mode="UP" type="button" class="btn btn-default roomEditAction"><span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></button>
+										<button i18n-title="page.detail.action.downRoom" mode="DOWN" type="button" class="btn btn-default roomEditAction"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></button>
 										
 									</div>
 								</div>
 
 								<div class="form-group">
-									<label for="roomId" title="The backend name for this room">Identity</label>
+									<label for="roomId" i18n-title="page.detail.field.roomIdentityTitle" i18n-text="page.detail.field.roomIdentity"><!--Identity--></label>
 									<input type="text" class="form-control" id="roomId" placeholder="Identifier"/>
 								</div>
 
 								<div class="form-group">
-									<label for="roomName" title="The human friendly name for this room">Name</label>
+									<label for="roomName" i18n-title="page.detail.field.roomNameTitle" i18n-text="page.detail.field.roomName"><!--Name--></label>
 									<input type="text" class="form-control" id="roomName" placeholder="Name"/>
 								</div>
 
-								<label for="roomContent">Background</label>
+								<label for="roomContent" i18n-text="page.detail.field.roomBackground"><!--Background--></label>
 								<div class="input-group" style="margin-bottom:10px;">
 									<select class="form-control" id="roomContent"></select>
 									<div class="input-group-btn">
-										<button mode="PICK" type="button" class="btn roomEditAction" id="pickBackground" title="Change the currently selected rooms background and preview image."><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>&nbsp;Change</button>
+										<button mode="PICK" type="button" class="btn roomEditAction" id="pickBackground" i18n-title="page.detail.action.changeTitle"><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>&nbsp;<span i18n-text="page.detail.action.change"><!--Change--></span></button>
 									</div>
 								</div>
 
 								<div class="form-group">
-									<label for="roomPreview">Preview</label>
+									<label for="roomPreview" i18n-text="page.detail.field.roomPreview"><!--Preview--></label>
 									<select class="form-control" id="roomPreview"></select>
 								</div>
 
 								<div class="form-group">
-									<label for="roomPlaybackType">Background Type</label>
+									<label for="roomPlaybackType" i18n-text="page.detail.field.roomBackgroundType"><!--Background Type--></label>
 									<select class="form-control" id="roomPlaybackType">
 										<option value="360">360 (Default)</option>
 										<!--<option value="cube">Cube (Not Ready)</option>-->
@@ -128,19 +128,19 @@
 					<div id="pointToolbar">
 						<div class="btn-toolbar">
 							<div class="btn-group" role="group" aria-label="Rooms">
-								<button title="Goto Previous Room" global mode="PREV" type="button" class="btn btn-default"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></button>
-								<button title="Goto Next Room" global mode="NEXT" type="button" class="btn btn-default"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button>
+								<button i18n-title="page.detail.action.pointPrevRoom" global mode="PREV" type="button" class="btn btn-default"><span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span></button>
+								<button i18n-title="page.detail.action.pointNextRoom" global mode="NEXT" type="button" class="btn btn-default"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button>
 							</div>
 							<div class="btn-group" role="group" aria-label="Room">
-								<button title="Link Rooms, creates a two way link" global mode="LINK" type="button" class="btn btn-primary" id="linkRoom"><span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span></button>
-								<button title="To Room, creates a one way link" global mode="LINK2" type="button" class="btn btn-default" id="linkRoom"><span class="glyphicon glyphicon-eject" aria-hidden="true"></span></button>
-								<button title="New Point, empty point, has no purpose yet" global mode="NEW" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+								<button i18n-title="page.detail.action.pointLinkRoom" global mode="LINK" type="button" class="btn btn-primary" id="linkRoom"><span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span></button>
+								<button i18n-title="page.detail.action.pointToRoom" global mode="LINK2" type="button" class="btn btn-default" id="linkRoom"><span class="glyphicon glyphicon-eject" aria-hidden="true"></span></button>
+								<button i18n-title="page.detail.action.pointNew" global mode="NEW" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
 							</div>
 							<div class="btn-group" role="group" aria-label="Room">
-								<button title="Edit Point" mode="EDIT" type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-								<button title="Delete Point" mode="DELETE" type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-								<button title="Move Point Up" mode="UP" type="button" class="btn btn-default"><span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></button>
-								<button title="Move Point Down" mode="DOWN" type="button" class="btn btn-default"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></button>
+								<button i18n-title="page.detail.action.pointEdit" mode="EDIT" type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+								<button i18n-title="page.detail.action.pointDelete" mode="DELETE" type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								<button i18n-title="page.detail.action.pointUp" mode="UP" type="button" class="btn btn-default"><span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></button>
+								<button i18n-title="page.detail.action.pointDown" mode="DOWN" type="button" class="btn btn-default"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></button>
 							</div>
 						</div>
 					</div>

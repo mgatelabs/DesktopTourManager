@@ -7,34 +7,35 @@
 <div>
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist" id="tabList">
-		<li role="presentation" class="active"><a href="#tours" aria-controls="tours" role="tab" data-toggle="tab">Dashboard</a></li>
+		<li role="presentation" class="active"><a href="#dash" aria-controls="tours" role="tab" data-toggle="tab" i18n-text="page.dash.tab.dash"><!--Dashboard--></a></li>
+		<li role="presentation"><a href="#licenses" aria-controls="tours" role="tab" data-toggle="tab" i18n-text="page.dash.tab.licenses"><!--Dashboard--></a></li>
 	</ul>
 	<!-- Tab panes -->
 	<div class="tab-content">
 	
-		<div role="tabpanel" class="tab-pane active" id="tours">
+		<div role="tabpanel" class="tab-pane active" id="dash">
 
 			
 			
             <div class="jumbotron" style="margin:2em auto 0 auto;width:80%;padding:1em;border-radius: 5px;">
-                <h1>Welcome</h1>
-                <p>
-                What would you like to accomplish?
+                <h1 i18n-text="page.dash.welcome"><!--Welcome--></h1>
+                <p i18n-text="page.dash.greet">
+                <!--What would you like to accomplish?-->
                 </p>
 
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                     <a class="btn btn-primary btn-lg"  id="newTour" href="#" role="button">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create a new tour
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span i18n-text="page.dash.newtour"><!--Create a new tour--></span>
                     </a>
 
                     <a class="btn btn-default btn-lg"  id="viewTours" href="#" role="button">
-                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> View all available tours
+                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> <span i18n-text="page.dash.viewall"><!--View all available tours--></span>
                     </a>
 
                 </div>
             
                 <p>
-                    <h2>Recent Files</h2>
+                    <h2 i18n-text="page.dash.recent"><!--Recent Files--></h2>
                     <div class="btn-group btn-group-justified" role="group" aria-label="Recent" id="recentList">
 
                     </div>
@@ -43,13 +44,149 @@
 
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                     <a class="btn btn-default btn-lg"  id="modifySettings" href="#" role="button">
-                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Modify settings
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> <span i18n-text="page.dash.settings"><!--Modify settings--></span>
                     </a>
                 </div>
             
             </div>
 
-		</div>
+		</div> <!-- End #dash -->
+
+        <div role="tabpanel" class="tab-pane" id="licenses">
+
+
+            <div class="well well-lg" style="margin:2em;">
+
+                <h2>Electron</h2>
+
+                <p>
+                Copyright (c) 2015 Mathias Buus-Madsen, Max Ogden and contributors
+                </p>
+                <p>
+                Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+                </p>
+                <p>
+                The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+                </p>
+                <p>
+                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+                </p>
+            </div>
+
+            <div class="well well-lg" style="margin:2em;">
+
+                <h2>i18next, i18next-sync-fs-backend</h2>
+
+                <p>
+                The MIT License (MIT)
+                </p>
+
+                <p>
+                Copyright (c) 2015 i18next
+                </p>
+
+                <p>
+                Permission is hereby granted, free of charge, to any person obtaining a copy
+                of this software and associated documentation files (the "Software"), to deal
+                in the Software without restriction, including without limitation the rights
+                to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                copies of the Software, and to permit persons to whom the Software is
+                furnished to do so, subject to the following conditions:
+                </p>
+
+                <p>
+                The above copyright notice and this permission notice shall be included in all
+                copies or substantial portions of the Software.
+                </p>
+
+                <p>
+                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                SOFTWARE.
+                </p>
+                
+            </div>
+        
+            <div class="well well-lg" style="margin:2em;">
+
+                <h2>electron-packager</h2>
+
+                <p>
+                Copyright (c) 2015 Max Ogden and other contributors
+                All rights reserved.
+                </p>
+                <p>
+                Redistribution and use in source and binary forms, with or without
+                modification, are permitted provided that the following conditions are met:
+                </p>
+                <p>
+                * Redistributions of source code must retain the above copyright notice, this
+                list of conditions and the following disclaimer.
+                </p>
+                <p>
+                * Redistributions in binary form must reproduce the above copyright notice,
+                this list of conditions and the following disclaimer in the documentation
+                and/or other materials provided with the distribution.
+                </p>
+                <p>
+                THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+                AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+                IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+                DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+                FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+                DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+                SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+                CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+                OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+                OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+                </p>
+                
+            </div>
+        
+            <div class="well well-lg" style="margin:2em;">
+                <h2>electron-default-menu</h2>            
+            </div>
+
+            <div class="well well-lg" style="margin:2em;">
+
+                <h2>lwip</h2>
+
+                <p>
+                    The MIT License (MIT)
+                </p>
+
+                <p>
+                Copyright (c) 2014 Eyal Arubas &lt;eyalarubas@gmail.com&gt;
+                </p>
+                <p>
+                Permission is hereby granted, free of charge, to any person obtaining a copy
+                of this software and associated documentation files (the "Software"), to deal
+                in the Software without restriction, including without limitation the rights
+                to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                copies of the Software, and to permit persons to whom the Software is
+                furnished to do so, subject to the following conditions:
+                </p>
+                <p>
+                The above copyright notice and this permission notice shall be included in all
+                copies or substantial portions of the Software.
+                </p>
+                <p>
+                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                SOFTWARE.
+                </p>
+            </div>
+
+		</div> <!-- End #licenses -->
+
 
 	</div>
 </div>

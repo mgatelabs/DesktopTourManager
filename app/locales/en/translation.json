@@ -1,0 +1,84 @@
+{
+    "app": {
+        "title":"Tour Manager"
+    },
+    "header":{
+        "dashboard": "Dashboard",
+        "tours": "Tours",
+        "new": "New",
+        "settings": "Settings",
+        "vfb": "View Facebook Page",
+        "vhb": "View Help Videos",
+        "vtw": "View Twitter Feed"
+    },
+    "page": {
+        "dash": {
+            "tab":{
+                "dash":"Dashboard",
+                "licenses":"Licenses"
+            },
+            "welcome": "Welcome",
+            "greet": "What would you like to accomplish?",
+            "newtour": "Create a new tour",
+            "viewall": "View all available tours",
+            "recent": "Recent Files",
+            "settings": "Modify Settings",
+            "edit": "Edit ({{file}})"
+        },
+        "list": {
+            "tab":"Available",
+            "name":"Tour Name",
+            "identifier":"Tour Identifier",
+            "options":"Available Options",
+            "edit": "Edit {{name}}",
+            "delete": "Delete {{name}}?"
+        },
+        "detail": {
+            "tabs": {
+                "info":"Information",
+                "infoTitle":"Edit basic infomation",
+                "rooms":"Rooms",
+                "roomTitle":"Create and edit rooms.  Rooms are where you tour can take you.",
+                "points":"Points",
+                "pointTitle":"Create and edit points.  Points are what you can interact with.",
+                "presets":"Presets",
+                "presetTitle":"Create and edit presets.  Presets define how content should be displayed.",
+                "files":"Files",
+                "fileTitle":"View available files"
+            },
+            "action": {
+                "addMissing":"Automaticlaly add missing rooms.  If you just added more files, hit this to fill in new content.",
+                "refreshRooms":"Refresh the information below",
+                "addExits":"Automatically add exits to every room",
+                "addRoom":"Add a new empty room",
+                "deleteRoom":"Delete the current room",
+                "upRoom":"Move the current room up",
+                "downRoom":"Move the current room down",
+                "change": "Change",
+                "changeTitle": "Change the currently selected rooms background and preview image.",
+            
+                "pointPrevRoom": "Goto Previous Room",
+                "pointNextRoom": "Goto Next Room",
+                "pointLinkRoom": "Link Rooms, creates a two way link",
+                "pointToRoom": "To Room, creates a one way link",
+                "pointNew": "New Point, empty point, has no purpose yet",
+                "pointEdit": "Edit Point",
+                "pointDelete": "Delete Point",
+                "pointUp": "Move Point Up",
+                "pointDown": "Move Point Down"
+            },
+            "field": {
+                "roomIdentity":"Identity",
+                "roomIdentityTitle":"The backend name for this room",
+                "roomName":"Name",
+                "roomNameTitle":"The human friendly name for this room",
+                "roomBackground":"Background",
+                "roomPreview":"Preview",
+                "roomBackgroundType":"Background Type"
+            }
+        }
+    },
+    "key1": "value of key 1 in en",
+    "key2": "value of key 2 in en",
+    "key3": "value of key 3 in en"
+}
