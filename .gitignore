@@ -8,6 +8,7 @@ Thumbs.db
 /app/release-builds
 /app/node_modules
 /app/env.json
+/app/env.js
 /app/*.html
 
 /dist

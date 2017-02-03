@@ -4,8 +4,7 @@ const defaultMenu = require('electron-default-menu');
 const path = require('path');
 const url = require('url');
 var ipc = require('electron').ipcMain;
-
-
+const env = require('./env');
 var fs = require('fs') // To read the directory listing
 
 // In the main process.
@@ -662,6 +661,21 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   const menu = defaultMenu(app, shell);
+
+  if (!env.devTools) {
+    var i = 0, j;
+    for (i = 0; i < menu.length; i++) {
+      if (menu[i].label == 'View') {
+        for (j = 0; j < menu[i].submenu.length; j++) {
+          if (menu[i].submenu[j].label == 'Toggle Developer Tools') {
+            menu[i].submenu.splice(j,1);
+            break;
+          }
+        }
+        break;
+      }
+    }
+  }
 
   // Set top-level application menu, using modified template 
   Menu.setApplicationMenu(Menu.buildFromTemplate(menu));

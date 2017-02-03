@@ -22,7 +22,7 @@
             });
 
             for (i = 1; i < data.recents.length; i++) {
-                a = $('<a class="btn btn-default btn-lg viewTour" href="#" role="button"></a>').text(data.recents[i].display).attr('tourId', data.recents[i].tourId).appendTo(list);
+                a = $('<a class="btn btn-default btn-lg viewTour" href="#" role="button"></a>').text(data.recents[i].display).attr('title', i18next.t('page.dash.edit', {'file': data.recents[i].display})).attr('tourId', data.recents[i].tourId).appendTo(list);
             }
             list.on('click', 'a.viewTour', function(){
                 var ref = $(this);

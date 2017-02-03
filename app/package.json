@@ -9,12 +9,12 @@
   "dependencies": {
     "lwip": "^0.0.9",
     "i18next": "^6.1.1",
-    "i18next-sync-fs-backend": "^0.1.0"
+    "i18next-sync-fs-backend": "^0.1.0",
+    "electron-default-menu": "^1.0.0"
   },
   "devDependencies": {
     "electron": "^1.4.15",
-    "electron-packager": "^8.5.1",
-    "electron-default-menu": "^1.0.0"
+    "electron-packager": "^8.5.1"
   },
   "scripts": {
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=../build/icon.icns --prune=true --out=release-builds",

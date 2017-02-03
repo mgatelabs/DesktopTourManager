@@ -56,7 +56,10 @@ gulp.task('less', function () {
 gulp.task('environment', function () {
     var configFile = 'config/env_' + utils.getEnvName() + '.json';
     projectDir.copy(configFile, destDir.path('env.json'), { overwrite: true });
+    configFile = 'config/env_' + utils.getEnvName() + '.js';
+    projectDir.copy(configFile, destDir.path('env.js'), { overwrite: true });
 });
+
 
 
 gulp.task('watch', function () {
