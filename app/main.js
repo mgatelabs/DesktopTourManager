@@ -6,6 +6,9 @@ const url = require('url');
 var ipc = require('electron').ipcMain;
 const env = require('./env');
 var fs = require('fs') // To read the directory listing
+// Language
+var i18next = require('i18next');
+var Backend = require('i18next-sync-fs-backend');
 
 // In the main process.
 global.sharedObject = {
@@ -13,6 +16,7 @@ global.sharedObject = {
     identifier: undefined
   }
 };
+
 
 // Context / Settings
 
@@ -406,10 +410,6 @@ var restMethods = {
         var definitionFile = context.paths.tours + tour + ".json";
         var infoFile = context.paths.tours + tour + context.paths.sep + "index.tour.json";
 
-        //console.log(fs.existsSync(tourFolder));
-        //console.log(fs.existsSync(definitionFile));
-        //console.log(fs.existsSync(infoFile));
-
         if (fs.existsSync(definitionFile)) {
           result.code = 'FAIL';
           result.msgs.push('Tour with same identifier already exists');
@@ -635,7 +635,7 @@ let win
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 1024, height: 768, minWidth: 1024, minHeight: 600, icon: __dirname + '/icon.ico'})
+  win = new BrowserWindow({width: 1024, height: 768, minWidth: 1024, minHeight: 600, title: i18next.t('app.title') + ' - ' + i18next.t('app.subtitle'), icon: __dirname + '/icon.ico'})
 
   // and load the index.html of the app.
   win.loadURL(url.format({
@@ -662,6 +662,8 @@ function createWindow () {
 app.on('ready', () => {
   const menu = defaultMenu(app, shell);
 
+  //console.log(path2);
+  
   if (!env.devTools) {
     var i = 0, j;
     for (i = 0; i < menu.length; i++) {
@@ -680,7 +682,24 @@ app.on('ready', () => {
   // Set top-level application menu, using modified template 
   Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
 
-  createWindow();
+  i18next
+    .use(Backend)
+    .init({
+      debug:false,
+      lng: 'en',
+      lngs: ['en', 'dev'],
+      ns:'main',
+      defaultNS:'main',
+      initImmediate: false,
+      backend: {
+        // path where resources get loaded from 
+        loadPath: path.join(__dirname, 'locales', '{{lng}}','{{ns}}.json')
+      }
+    }, function(err, t){
+      console.log(err);
+      // Only create the window when the languages are ready
+      createWindow();
+    });
 });
 
 

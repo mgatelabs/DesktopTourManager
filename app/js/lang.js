@@ -5,7 +5,8 @@ i18next
   .use(Backend)
   .init({
     lng: 'en',
-    ns:'translation',
+    ns:['client', 'main'],
+    defaultNS: 'client',
     initImmediate: false,
     backend: {
     // path where resources get loaded from 

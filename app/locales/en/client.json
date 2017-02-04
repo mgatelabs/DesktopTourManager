@@ -1,7 +1,4 @@
 {
-    "app": {
-        "title":"Tour Manager"
-    },
     "header":{
         "dashboard": "Dashboard",
         "tours": "Tours",
