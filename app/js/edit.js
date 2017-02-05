@@ -142,17 +142,16 @@
 
         $('#save').click(function(){
             ns.save();
+            MG.warn = false;
         });
 
+        /*
         $('#import').click(function(){
             $('#discardButton').attr('href2', 'import.html')
             $('#leaveDialog').modal();
         });
-
-        $('#list').click(function(){
-            window.location = 'list.html';
-        });
-
+        */
+        
         // Room Grid
         ns.roomGrid = $('#roomGrid');
 
@@ -189,6 +188,7 @@
                             }
                         }
                         if (!located) {
+                            MG.warn = true;
                             ns.index.json.rooms.push({"id":item.key, "title":item.key, background: item.key, "content":item.content, "preview":item.preview,"points":[], "world":{}});
                         }
                     }
@@ -212,6 +212,7 @@
                             }
                         }
                         if (!located) {
+                            MG.warn = true;
                             room.points.push({title:'Exit', type:'rot', action:'exit', icon:'exit', recenter:'false', yaw: 0, pitch: -90});
                         }
                     }
@@ -254,6 +255,7 @@
                         ns.moveRoom(index);
                         ns.buildRoomsGrid();
                         ns.selectRoom(index - 1);
+                        MG.warn = true;
                     }
                 } break;
                 case 'DOWN': {
@@ -261,12 +263,14 @@
                         ns.moveRoom(index + 1);
                         ns.buildRoomsGrid();
                         ns.selectRoom(index + 1);
+                        MG.warn = true;
                     }
                 } break;
                 case 'DELETE': {
                     if (confirm('Delete room, are you sure?')) {
                         ns.deleteRoom(index);
                         ns.buildRoomsGrid();
+                        MG.warn = true;
                     }
                 } break;
             }
@@ -276,6 +280,7 @@
             var index = $(this).attr('index') - 0;
             if (ns.onSelectBackgroundFunction) {
                 ns.onSelectBackgroundFunction(index);
+                MG.warn = true;
             }
             ns.onSelectBackgroundFunction = undefined;
 
@@ -286,6 +291,7 @@
             var index = $(this).attr('index') - 0;
             if (ns.onSelectRoomFunction) {
                 ns.onSelectRoomFunction(index);
+                MG.warn = true;
             }
             ns.onSelectRoomFunction = undefined;
             $('#selectRoom').modal('hide');
@@ -308,24 +314,28 @@
         ns.roomName.change(function(){
             if (ns.currentRoom) {
                 ns.currentRoom.title = $(this).val();
+                MG.warn = true;
             }
         });
 
         ns.roomPreview.change(function(){
             if (ns.currentRoom) {
                 ns.currentRoom.preview = $(this).val();
+                MG.warn = true;
             }
         });
 
         ns.roomContent.change(function(){
             if (ns.currentRoom) {
                 ns.currentRoom.content = $(this).val();
+                MG.warn = true;
             }
         });
 
         ns.roomPlaybackType.change(function(){
             if (ns.currentRoom) {
                 ns.currentRoom.playback = $(this).val();
+                MG.warn = true;
             }
         });
 
@@ -336,6 +346,7 @@
                 }
                 ns.currentRoom.world.yaw = $(this).val();
                 MG.preview.instance.updateRoomOrientation(ns.currentRoom);
+                MG.warn = true;
             }
         });
 
@@ -365,6 +376,7 @@
 				// Clean up
 				newRoomId.val('');
 				newRoomName.val('');
+                MG.warn = true;
             }
         });
 
@@ -413,6 +425,7 @@
                             ns.currentRoom.points.push({title:otherRoom.title, type:'rot', action:'nav', to:otherRoom.id, icon:'dot', recenter:'false', yaw: lon});
                             ns.updatePointList();
                             ns.selectPoint(ns.currentRoom.points.length - 1);
+                            MG.warn = true;
 
                             if (mode == 'LINK') {
                                 otherRoom.points.push({title:ns.currentRoom.title, type:'rot', action:'nav', to:ns.currentRoom.id, icon:'dot', recenter:'false', yaw: revLon});
@@ -431,19 +444,23 @@
                         ns.updatePointList();
                         ns.selectPoint(ns.currentRoom.points.length - 1);
                         MG.preview.pointUpdate();
+                        MG.warn = true;
                     } break;
                     case 'UP': {
                         ns.movePoint(index);
                         ns.updatePointList();
+                        MG.warn = true;
                     } break;
                     case 'DOWN': {
                         ns.movePoint(index + 1);
                         ns.updatePointList();
+                        MG.warn = true;
                     } break;
                     case 'DELETE': {
                         if (confirm('Delete point, are you sure?')) {
                             ns.deletePoint(index);
                             ns.updatePointList();
+                            MG.warn = true;
                         }
                     } break;
                 }
@@ -510,6 +527,7 @@
             if (ns.currentPoint) {
                 ns.currentPoint.title = $(this).val();
                 ns.pointUpdated();
+                MG.warn = true;
             }
         });
 
@@ -518,6 +536,7 @@
                 ns.currentPoint.type = $(this).val();
                 ns.pointUpdated();
                 ns.updatePointDisplay();
+                MG.warn = true;
             }
         });
 
@@ -525,6 +544,7 @@
             if (ns.currentPoint) {
                 ns.currentPoint.icon = $(this).val();
                 ns.pointUpdated();
+                MG.warn = true;
             }
         });
 
@@ -533,6 +553,7 @@
                 ns.currentPoint.action = $(this).val();
                 ns.pointUpdated();
                 ns.updatePointDisplay();
+                MG.warn = true;
             }
         });
 
@@ -540,6 +561,7 @@
             if (ns.currentPoint) {
                 ns.currentPoint.size = $(this).val();
                 ns.pointUpdated();
+                MG.warn = true;
             }
         });
 
@@ -547,24 +569,28 @@
             if (ns.currentPoint) {
                 ns.currentPoint.to = $(this).val();
                 ns.pointUpdated();
+                MG.warn = true;
             }
         });
 
         ns.pointContent.change(function(){
             if (ns.currentPoint) {
                 ns.currentPoint.content = $(this).val();
+                MG.warn = true;
             }
         });
 
         ns.pointPreset.change(function(){
             if (ns.currentPoint) {
                 ns.currentPoint.preset = $(this).val();
+                MG.warn = true;
             }
         });
 
         ns.pointFlow.change(function(){
             if (ns.currentPoint) {
                 ns.currentPoint.flow = $(this).val();
+                MG.warn = true;
             }
         });
 
@@ -572,12 +598,14 @@
             if (ns.currentPoint) {
                 ns.currentPoint.recenter = $(this).val();
                 ns.pointUpdated();
+                MG.warn = true;
             }
         });
 
         ns.pointTimer.change(function(){
             if (ns.currentPoint) {
                 ns.currentPoint.timer = $(this).val();
+                MG.warn = true;
             }
         });
 
@@ -587,6 +615,7 @@
             if (ns.currentPoint) {
                 ns.currentPoint.yaw = $(this).val();
                 ns.pointUpdated();
+                MG.warn = true;
             }
         });
 
@@ -594,6 +623,7 @@
             if (ns.currentPoint) {
                 ns.currentPoint.pitch = $(this).val();
                 ns.pointUpdated();
+                MG.warn = true;
             }
         });
 
@@ -601,6 +631,7 @@
             if (ns.currentPoint) {
                 ns.currentPoint.depth = $(this).val();
                 ns.pointUpdated();
+                MG.warn = true;
             }
         });
 
@@ -610,6 +641,7 @@
             if (ns.currentPoint) {
                 ns.currentPoint.x = $(this).val();
                 ns.pointUpdated();
+                MG.warn = true;
             }
         });
 
@@ -617,6 +649,7 @@
             if (ns.currentPoint) {
                 ns.currentPoint.y = $(this).val();
                 ns.pointUpdated();
+                MG.warn = true;
             }
         });
 
@@ -624,6 +657,7 @@
             if (ns.currentPoint) {
                 ns.currentPoint.z = $(this).val();
                 ns.pointUpdated();
+                MG.warn = true;
             }
         });
 
@@ -631,6 +665,7 @@
             if (ns.currentPoint) {
                 ns.currentPoint.xrot = $(this).val();
                 ns.pointUpdated();
+                MG.warn = true;
             }
         });
 
@@ -638,6 +673,7 @@
             if (ns.currentPoint) {
                 ns.currentPoint.yrot = $(this).val();
                 ns.pointUpdated();
+                MG.warn = true;
             }
         });
 
@@ -645,6 +681,7 @@
             if (ns.currentPoint) {
                 ns.currentPoint.zrot = $(this).val();
                 ns.pointUpdated();
+                MG.warn = true;
             }
         });
 
@@ -667,15 +704,18 @@
                 case 'UP': {
                     ns.movePreset(index);
                     ns.updatePresetList();
+                    MG.warn = true;
                 } break;
                 case 'DOWN': {
                     ns.movePreset(index + 1);
                     ns.updatePresetList();
+                    MG.warn = true;
                 } break;
                 case 'DELETE': {
                     if (confirm('Delete preset, are you sure?')) {
                         ns.deletePreset(index);
                         ns.updatePresetList();
+                        MG.warn = true;
                     }
                 } break;
                 case 'COPY': {
@@ -699,6 +739,8 @@
                         ns.updatePresetList();
                         ns.updatePresetToList();
                         ns.selectPreset(ns.index.json.presets.length - 1);
+
+                        MG.warn = true;
                     }
                 } break;
             }
@@ -729,6 +771,7 @@
                 ns.updatePresetToList();
                 ns.selectPreset(ns.index.json.presets.length - 1);
                 $('#newPresetInfo').modal('hide');
+                MG.warn = true;
             }
         });
 
@@ -755,36 +798,42 @@
 
                 ns.updatePresetList();
                 ns.updatePresetAttributes();
+                MG.warn = true;
             }
         });
 
         ns.presetMode.change(function(){
             if (ns.currentPreset) {
                 ns.currentPreset.mode = $(this).val();
+                MG.warn = true;
             }
         });
 
         ns.presetFill.change(function(){
             if (ns.currentPreset) {
                 ns.currentPreset.fill = $(this).val();
+                MG.warn = true;
             }
         });
 
         ns.presetIpd.change(function(){
             if (ns.currentPreset) {
                 ns.currentPreset.ipd = $(this).val();
+                MG.warn = true;
             }
         });
 
         ns.presetFlip.change(function(){
             if (ns.currentPreset) {
                 ns.currentPreset.flip = $(this).val();
+                MG.warn = true;
             }
         });
 
         ns.presetFilter.change(function(){
             if (ns.currentPreset) {
                 ns.currentPreset.filter = $(this).val();
+                MG.warn = true;
             }
         });
 
@@ -793,6 +842,7 @@
             var ele = $(this), key = ele.attr('key');
                 if (key) {
                     ns.currentPreset.settings[key] = ele.val();
+                    MG.warn = true;
                 }
             }
         })
@@ -813,6 +863,7 @@
                 }
             }
             target.val(value).change();
+            MG.warn = true;
         });
 
         // load
@@ -841,6 +892,8 @@
         ns.definition = {};
         ns.index = {};
         ns.files = [];
+
+        MG.warn = false;
 
         var rnd = new Date().getTime();
         MG.common.beforeHandler();
@@ -884,7 +937,7 @@
             MG.common.errorHandler(data);
         }
         ns.refresh();
-        
+        $('#wrap').fadeIn();
     };
 
     ns.verify = function() {

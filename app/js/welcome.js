@@ -8,7 +8,7 @@
         $('#pickToursLocation').click(function(){
             var data = REST.sync('pickToursLocation', {});
             if (data.code == 'OK') {
-                window.location = 'list.html';
+                window.location = 'dashboard.html';
             }
         });
     });

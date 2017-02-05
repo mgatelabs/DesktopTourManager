@@ -18,10 +18,17 @@
         }
     };
 
+    ns.goto = function(pageLocation){
+        $('#wrap').fadeOut(400, function(){
+            window.location = pageLocation;
+        });
+    };
+
 	$(function(){	
 		$('#discardButton').click(function(){
 			var ref = $(this);
-			window.location = ref.attr('href2');
+            $('#leaveDialog').modal('hide');
+			MG.common.goto(ref.attr('href2'));
 		});
 	
 		$('[href2]').click(function(){
@@ -31,7 +38,7 @@
 				$('#leaveDialog').modal();
 				return;
 			}
-			window.location = ref.attr('href2');
+            MG.common.goto(ref.attr('href2'));
 		});
 
         $('.open-in-browser').click(function() {

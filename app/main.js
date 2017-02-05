@@ -3,9 +3,10 @@ const {shell} = require('electron');
 const defaultMenu = require('electron-default-menu');
 const path = require('path');
 const url = require('url');
-var ipc = require('electron').ipcMain;
-const env = require('./env');
-var fs = require('fs') // To read the directory listing
+var ipc = require('electron').ipcMain; // Fake Rest
+const env = require('./env'); // Run-time Variables
+var fs = require('fs') // Files
+var archiver = require('archiver'); // Zipping
 // Language
 var i18next = require('i18next');
 var Backend = require('i18next-sync-fs-backend');
@@ -398,6 +399,46 @@ var restMethods = {
 	}
 	return result;
   },
+  zipTour: function(options, callback){
+    var result = {code: 'OK', msgs: []}, tour = options.tourId;
+
+    if (!context.paths.tours) {
+      result.code = 'FAIL';
+      result.msgs.push('Please setup location to tours folder to continue');
+    } else {
+
+      var tourFolder = context.paths.tours + tour + context.paths.sep;
+		
+      var tourZip = context.paths.tours + tour + ".zip";
+
+      if (fs.existsSync(tourZip)) fs.unlinkSync(tourZip);
+
+      var infoFile = context.paths.tours + tour + context.paths.sep + "index.tour.json";
+			var tourPreview = context.paths.tours + tour + ".png";
+			var tourJson = context.paths.tours + tour + ".json";
+
+		  var files = fs.readdirSync(tourFolder), i, file;
+
+      var output = fs.createWriteStream(tourZip);
+
+      var archive = archiver('zip', {
+          store: true // Sets the compression method to STORE. 
+      });
+
+      archive.pipe(output);
+
+      archive.append(fs.createReadStream(tourJson), { name: tour + ".json" });
+      if (fs.existsSync(tourPreview)) {
+        archive.append(fs.createReadStream(tourPreview), { name: tour + ".png" });
+      }
+
+      archive.directory(tourFolder, tour);
+
+      archive.finalize();
+    }
+
+    callback(result);
+  },
   createTour: function(options){
     var result = {code: 'OK', msgs: []}, tour = options.tourId + '.tour', name = options.tourName;
 
@@ -664,8 +705,10 @@ app.on('ready', () => {
 
   //console.log(path2);
   
+  var i = 0, j;
+
   if (!env.devTools) {
-    var i = 0, j;
+    
     for (i = 0; i < menu.length; i++) {
       if (menu[i].label == 'View') {
         for (j = 0; j < menu[i].submenu.length; j++) {
@@ -677,6 +720,14 @@ app.on('ready', () => {
         break;
       }
     }
+  }
+
+  for (i = menu.length - 1; i >= 0; i--) {
+      if (menu[i].role == 'help') {
+        menu.splice(i, 1);
+      } else if (menu[i].label == 'Edit') {
+        menu.splice(i, 1);
+      }
   }
 
   // Set top-level application menu, using modified template 

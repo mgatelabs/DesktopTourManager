@@ -4,18 +4,22 @@
     MG.list = MG.list || {};
     var ns = MG.list;
 
-    ns.start = function() {
+    ns.init = function() {
         // anchors
         ns.listBody = $('#listTable tbody');
-        // load
-        ns.load();
 
         ns.listBody.on('click', 'tr td button[mode]', function(){
             var ref = $(this), index = ref.attr('index') - 0, mode = ref.attr('mode');
             switch (mode) {
                 case 'EDIT': {
                     require('electron').remote.getGlobal('sharedObject').tour.identifier = ref.attr('identifier');
-                    window.location = 'detail.html';
+                    MG.common.goto('detail.html');
+                } break;
+                case 'ZIP': {
+                    var i = ref.attr('index'), identifier = ref.attr('identifier');
+                    REST.async('zipTour', {tourId: identifier}, function(result){
+
+                    });
                 } break;
                 case 'DELETE': {
                     var i = ref.attr('index'), identifier = ref.attr('identifier');
@@ -31,11 +35,16 @@
                 } break;
             }
         });
-    };
+    }
 
-    MG.common.beforeHandler();
+    ns.start = function() {
+        // load
+        ns.load(); 
+    };    
 
     ns.load = function() {
+        MG.common.beforeHandler();
+
         var data = REST.sync('getTours', {});
 
         ns.listBody.empty();
@@ -53,6 +62,13 @@
 
                 $('<td></td>').text(item.name).appendTo(tr);
                 $('<td></td>').text(item.identifier).appendTo(tr);
+
+                td = $('<td></td>').appendTo(tr);
+
+                link = $('<button type="button" style="margin-right:4px;" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-compressed" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'ZIP').appendTo(td);
+                link.attr('identifier', item.identifier);
+                link.attr('title', i18next.t('page.list.zip', {'name': item.name}));
+
                 td = $('<td></td>').appendTo(tr);
 
                 link = $('<button type="button" style="margin-right:4px;" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'DELETE').appendTo(td);
@@ -64,10 +80,5 @@
         }
         
     };
-
-
-    $(function(){
-        ns.start();
-    });
 
 }());

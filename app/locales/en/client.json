@@ -8,15 +8,24 @@
         "vhb": "View Help Videos",
         "vtw": "View Twitter Feed"
     },
+    "title": {
+        "app":"Desktop Tour Manager",
+        "dashboard":"Dashboard - $t(title.app)",
+        "import":"Import Media - $t(title.app)",
+        "detail":"Editing - $t(title.app)"
+    },
     "page": {
         "dash": {
-            "tab":{
+            "tabs":{
                 "dash":"Dashboard",
+                "list":"Available",
+                "create":"Create",
+                "settings":"Settings",
                 "licenses":"Licenses"
             },
             "welcome": "Welcome",
             "greet": "What would you like to accomplish?",
-            "newtour": "Create a new tour",
+            "newtour": "Create tour",
             "viewall": "View all available tours",
             "recent": "Recent Files",
             "settings": "Modify Settings",
@@ -28,7 +37,17 @@
             "identifier":"Tour Identifier",
             "options":"Available Options",
             "edit": "Edit {{name}}",
+            "zip": "Zip {{name}} for distribution",
             "delete": "Delete {{name}}?"
+        },
+        "import": {
+            "tab":"Files",
+            "action": {
+                "back": "Back to tour",
+                "process": "Import Media",
+                "processTitle": "Run through your choices and add content",
+                "select": "Select source flder"
+            }
         },
         "detail": {
             "tabs": {
@@ -44,6 +63,9 @@
                 "fileTitle":"View available files"
             },
             "action": {
+                "addFiles":"Import Media",
+                "save":"Save",
+
                 "addMissing":"Automaticlaly add missing rooms.  If you just added more files, hit this to fill in new content.",
                 "refreshRooms":"Refresh the information below",
                 "addExits":"Automatically add exits to every room",

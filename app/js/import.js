@@ -13,6 +13,9 @@
     ns.selectFolder = function(){
         ns.fileBody.empty();
         var data = REST.sync('findImportableFiles', {identifier: ns.tourId});
+
+        $('#wrap').fadeIn();
+
         ns.lastSelectRequest = data;
         if (data.code == 'OK') {
             var tr, td, file, i, input, span;
@@ -202,10 +205,6 @@
         ns.fileBody = $('#fileBody tbody');
 
         ns.tourId = require('electron').remote.getGlobal('sharedObject').tour.identifier
-
-        $('#editTour').click(function(){
-            window.location = 'detail.html';
-        });
 
         $('#selectFolder').click(function(){
             ns.selectFolder();

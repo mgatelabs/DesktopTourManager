@@ -1,8 +1,17 @@
 (function(){
 
     window.MG = window.MG || {};
-    MG.set = MG.set || {};
-    var ns = MG.set;
+    MG.settings = MG.settings || {};
+    var ns = MG.settings;
+
+    ns.init = function() {
+        $('#pickToursLocation').click(function(){
+            var data = REST.sync('pickToursLocation', {});
+            if (data.code == 'OK') {
+                $('#settingPathsTours').val(data.dir);
+            }
+        });
+    };
 
 	ns.start = function() {
         // load
@@ -10,6 +19,8 @@
     };
 	
 	ns.load = function() {
+        MG.common.beforeHandler();
+
         var data = REST.sync('getSettings', {});
         if (data.code == 'OK') {
             $('#settingPathsTours').val(data.paths.tours);
@@ -21,13 +32,4 @@
         }
     };
 	
-    $(function(){
-		ns.start();
-        $('#pickToursLocation').click(function(){
-            var data = REST.sync('pickToursLocation', {});
-            if (data.code == 'OK') {
-                $('#settingPathsTours').val(data.dir);
-            }
-        });
-    });
 }());

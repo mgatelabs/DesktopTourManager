@@ -4,9 +4,7 @@
     MG.create = MG.create || {};
     var ns = MG.create;
 
-    MG.common.beforeHandler();
-
-    $(function(){
+    ns.init = function(){
         $('#createTour').click(function(){
             var tourId = $('#newTourId').val(), tourName = $('#newTourName').val(), result = {code:'OK', msgs:[]};
 
@@ -38,16 +36,10 @@
                 MG.common.errorHandler(result);
             }
         });
+    };
 
-        $('#pickSourceLocation').click(function(){
-            var data = REST.sync('pickSourceLocation', {});
-            if (data.code == 'OK') {
-                //ns.load();
-            }
-        });
-        
-    });
-
-    
+    ns.start = function(){
+        MG.common.beforeHandler();
+    };   
 
 }());
