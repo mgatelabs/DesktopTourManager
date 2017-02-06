@@ -14,6 +14,16 @@
         "import":"Import Media - $t(title.app)",
         "detail":"Editing - $t(title.app)"
     },
+    "msgs": {
+        "missingFieldValue": "Please enter {{fieldName}} and try again",
+        "missingFieldVar": "The field {{fieldName}} is missing the variable {{variable}}",
+        "noFileName": "Could not detect the filename",
+        "noFileExt": "Could not detect the file extension",
+        "noBackgroundId": "Could not detect the background identity",
+        "noPreviewId": "Could not detect the preview identity",
+        "keyMismatch": "The system generated non-matching keys {{key1}} and {{key2}} when extracking the background and preview identities.  Something isn't right with the $t(page.settings.regExPreviewKey) value.",
+        "duplicateNames": "The system generated a background and preview image with the same name.  Please make sure $t(page.settings.regExPreviewKey) is not just #KEY#"
+    },
     "page": {
         "dash": {
             "tabs":{
@@ -25,6 +35,7 @@
             },
             "welcome": "Welcome",
             "greet": "What would you like to accomplish?",
+            "about": "To Desktop Tour Station, an app for creating and editing tours for Mobile VR Station.",
             "newtour": "Create tour",
             "viewall": "View all available tours",
             "recent": "Recent Files",
@@ -47,6 +58,24 @@
                 "process": "Import Media",
                 "processTitle": "Run through your choices and add content",
                 "select": "Select source flder"
+            }
+        },
+        "settings": {
+            "location": "Storage Location",
+            "regExBack":"Background Extraction",
+            "regExPrev":"Preview Extraction",
+            "regExSample":"Sample Filename",
+            "regExPreviewKey":"Preview Key",
+            "titles": {
+                "paths": "Paths / Folders",
+                "location": "Please choose a location to save and load your tours from.  Please ensure you have enough free space to store your tours and read and write permission.",
+                "regEx": "Regular Expression",
+                "regExInfo":"We use regular expression to help link backgrounds to their previews.  We don’t want to impose an exact format so you’re free to modify our expressions used to name and detect images.  If you do change this, previous projects will be impacted.",
+                "backEx": "This expression is used to locate background images.",
+                "previewEx": "This expression is used to locate preview images that are tied to a background.",
+                "previewKey": "This is used to test out expression changes. This should be a filename that would come from your camera.",
+                "sample": "This value is used to generate the preview file name. It should contain the string #KEY#."
+                
             }
         },
         "detail": {

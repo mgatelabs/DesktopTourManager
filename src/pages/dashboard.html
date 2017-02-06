@@ -26,6 +26,13 @@
 			
             <div class="jumbotron" style="margin:2em auto 0 auto;width:80%;padding:1em;border-radius: 5px;">
                 <h1 i18n-text="page.dash.welcome"><!--Welcome--></h1>
+
+                <p i18n-text="page.dash.about" style="font-size: 18px;">
+                <!--To Desktop VR Station, an app for creating and editing tours for Mobile VR Station.-->
+                </p>
+
+                <hr>
+
                 <p i18n-text="page.dash.greet">
                 <!--What would you like to accomplish?-->
                 </p>
@@ -127,67 +134,77 @@
 
         <div role="tabpanel" class="tab-pane" id="settings"> <!-- Start #settings -->
 
-            
+            <div class="well well-lg" style="margin:2em;">
 
-            <div style="margin:1em">
-                <h2>Paths</h2>
+                <div style="margin:1em">
+                    <h2 i18n-text="page.settings.titles.paths"><!--Paths--></h2>
 
-				<div class="input-group" style="margin-bottom:10px;">
-					<span class="input-group-addon">Tours Location</span>
-					<input type="text" class="form-control" id="settingPathsTours" readonly placeholder="Path to storage folder"/>
-					<div class="input-group-btn">
-						<button type="button" class="btn btn-primary" id="pickToursLocation"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;Change</button>
-					</div>
-				</div>
+                    <div class="input-group" style="margin-bottom:10px;">
+                        <span class="input-group-addon" i18n-text="page.settings.location">Tours Location</span>
+                        <input type="text" class="form-control" id="settingPathsTours" readonly placeholder="Path to storage folder"/>
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-primary" id="pickToursLocation"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;Change</button>
+                        </div>
+                    </div>
 
-				<div class="alert alert-info" role="alert">
+                    <div class="alert alert-info" role="alert" i18n-text="page.settings.titles.location">
 
-					<p>
-						Please choose a location to save and load your tours from.
-					</p>
+                    </div>
+                </div>
 
-					<p>
-						<ul>
-							<li>Please make sure you have:
-							<ul>
-								<li>Enough free space to store tours</li>
-								<li>Permission to read and write</li>
-							</ul>
-							</li>
-						</ul>
-					</p>
+            </div>
 
-				</div>
-			</div>
+            <div class="well well-lg" style="margin:2em;">
 
-            
+                <div style="margin:1em">
 
-            <div style="margin:1em">
+                    <h2 i18n-text="page.settings.titles.regEx"><!--Regular Expression--></h2>
 
-                <h2>Regular Expression</h2>
+                    <div class="alert alert-info" role="alert" i18n-text="page.settings.titles.regExInfo">
 
-				<div class="input-group" style="margin-bottom:10px;">
-					<span class="input-group-addon">Background</span>
-					<input type="text" class="form-control" id="settingExpBackground" placeholder="RegEx for background images"/>
-					<div class="input-group-btn">
-						<button type="button" class="btn btn-primary" id="updateSettingExpBackground"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;Update</button>
-					</div>
-				</div>
+                    </div>
 
-				<div class="input-group" style="margin-bottom:10px;">
-					<span class="input-group-addon">Preview</span>
-					<input type="text" class="form-control" id="settingExpPreview" placeholder="RegEx for preview images"/>
-					<div class="input-group-btn">
-						<button type="button" class="btn btn-primary" id="updateSettingExpPreview"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;Update</button>
-					</div>
-				</div>
+                    <div class="input-group" style="margin-bottom:10px;">
+                        <span class="input-group-addon" i18n-text="page.settings.regExBack"><!--Background--></span>
+                        <input type="text" class="form-control" id="settingExpBackground" placeholder="RegEx for background images"/>
+                    </div>
 
-				<div class="alert alert-info" role="alert">
+                    <div class="alert alert-info" role="alert" i18n-text="page.settings.titles.backEx">
 
-					We use regular expression to help link backgrounds to their previews.  We don’t want to impose an exact format so you’re free to modify our expressions used to extract the background key, content and preview information.
+                    </div>
 
-				</div>
-			</div>
+                    <div class="input-group" style="margin-bottom:10px;">
+                        <span class="input-group-addon" i18n-text="page.settings.regExPrev"><!--Preview--></span>
+                        <input type="text" class="form-control" id="settingExpPreview" placeholder="RegEx for preview images"/>
+                    </div>
+
+                    <div class="alert alert-info" role="alert" i18n-text="page.settings.titles.previewEx">
+
+                    </div>
+
+                    <div class="input-group" style="margin-bottom:10px;">
+                        <span class="input-group-addon" i18n-text="page.settings.regExPreviewKey"><!--Preview Key--></span>
+                        <input type="text" class="form-control" id="settingPreviewKey" placeholder="String used to generate preview names"/>
+                    </div>
+
+                    <div class="alert alert-info" role="alert" i18n-text="page.settings.titles.previewKey">
+
+                    </div>
+
+                    <div class="input-group" style="margin-bottom:10px;">
+                        <span class="input-group-addon" i18n-text="page.settings.regExSample"><!--Preview--></span>
+                        <input type="text" class="form-control" id="settingExpSample" placeholder="Sample background image name"/>
+                    </div>
+
+                    <div class="alert alert-info" role="alert" i18n-text="page.settings.titles.sample">
+
+                    </div>
+
+                    <button type="button" class="btn btn-primary" id="updateRegEx"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;Update</button>
+                    
+                </div>
+
+            </div>
 
         </div> <!-- End #settings -->
 
@@ -200,6 +217,7 @@
 
                 <p style="font-size:9px;">http://electron.atom.io/</p>
 
+                <hr>
 
                 <p>
                 Copyright (c) 2015 Mathias Buus-Madsen, Max Ogden and contributors
@@ -220,6 +238,8 @@
                 <h2>electron-boilerplate</h2>
 
                 <p style="font-size:9px;">https://github.com/szwacz/electron-boilerplate</p>
+
+                <hr>
 
                 <p>
                 The MIT License (MIT)
@@ -243,6 +263,8 @@
                 <h2>i18next, i18next-sync-fs-backend</h2>
 
                 <p style="font-size:9px;">http://i18next.com/</p>
+
+                <hr>
 
                 <p>
                 The MIT License (MIT)
@@ -282,6 +304,10 @@
 
                 <h2>electron-packager</h2>
 
+                <p style="font-size:9px;">https://www.npmjs.com/package/electron-packager</p>
+
+                <hr>
+
                 <p>
                 Copyright (c) 2015 Max Ogden and other contributors
                 All rights reserved.
@@ -316,11 +342,53 @@
         
             <div class="well well-lg" style="margin:2em;">
                 <h2>electron-default-menu</h2>            
+
+                <p style="font-size:9px;">https://www.npmjs.com/package/electron-default-menu</p>
+            </div>
+        
+            <div class="well well-lg" style="margin:2em;">
+                <h2>electron-windows-store</h2>            
+
+                <p style="font-size:9px;">https://www.npmjs.com/package/electron-windows-store</p>
+
+                <hr>
+
+                <p>
+                    The MIT License (MIT)
+                </p>
+                <p>
+                    Copyright (c) Felix Rieseberg
+                </p>
+                <p>
+                    Permission is hereby granted, free of charge, to any person obtaining a copy
+                    of this software and associated documentation files (the "Software"), to deal
+                    in the Software without restriction, including without limitation the rights
+                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                    copies of the Software, and to permit persons to whom the Software is
+                    furnished to do so, subject to the following conditions:
+                </p>
+                <p>
+                    The above copyright notice and this permission notice shall be included in all
+                    copies or substantial portions of the Software.
+                </p>
+                <p>
+                    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                    SOFTWARE.
+                </p>
             </div>
 
             <div class="well well-lg" style="margin:2em;">
 
                 <h2>lwip</h2>
+
+                <p style="font-size:9px;">https://www.npmjs.com/package/lwip</p>
+
+                <hr>
 
                 <p>
                     The MIT License (MIT)
@@ -355,6 +423,10 @@
             <div class="well well-lg" style="margin:2em;">
 
                 <h2>archiver </h2>
+
+                <p style="font-size:9px;">https://www.npmjs.com/package/archiver</p>
+
+                <hr>
 
                 <p>
                 Copyright (c) 2012-2014 Chris Talkington, contributors.

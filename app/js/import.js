@@ -18,6 +18,9 @@
 
         ns.lastSelectRequest = data;
         if (data.code == 'OK') {
+
+            ns.previewKey = data.previewKey || '#KEY#_1';
+
             var tr, td, file, i, input, span;
 
             for (i = 0; i < data.files.length; i++) {
@@ -69,7 +72,7 @@
             switch(choice) {
                 case 'BACK': {
                     tempCommands.push({index:i, type:'BACK', filename:item.filename, target:target, ext: 'jpg'});
-                    tempCommands.push({index:i, type:'PREVIEW', filename:item.filename, target:target+'_1', ext: 'jpg'});
+                    tempCommands.push({index:i, type:'PREVIEW', filename:item.filename, target: ns.previewKey.replace('#KEY#', target), ext: 'jpg'});
                 } break;
                 case 'FIX': {
                     tempCommands.push({index:i, type:'FIX', filename:item.filename, target:target, ext: 'jpg'});

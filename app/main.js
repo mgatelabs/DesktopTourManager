@@ -30,7 +30,9 @@ var context = {
   },
   expressions: { // Modifible Regex expressions
     backRegEx: '^(?:([a-zA-Z0-9-~]+))\\.(png|jpg|jpeg)$',
-    previewRegEx: '^(?:([a-zA-Z0-9-~]+))_1\\.(png|jpg|jpeg)$'
+    previewRegEx: '^(?:([a-zA-Z0-9-~]+))_1\\.(png|jpg|jpeg)$',
+    sampleFileName: 'DSCN0045.JPG',
+    previewKey: '#KEY#_1'
   },
   recent: [
 
@@ -54,6 +56,7 @@ var commonRegEx = {
   backgroundFileExtensions: /^(png|jpg|jpeg)$/,
   playableFileExtensions: /^(png|jpg|jpeg|mp4|sbs|m4v|mov|mp3|stream|mpo)$/,
   fixFileExtensions: /^(png|jpg|jpeg)$/,
+  extractFileNameString:'^(?:([a-zA-Z0-9-_~]+))\.(?:([a-zA-Z4]{3,6}))$',
   extractFileName: /^(?:([a-zA-Z0-9-_~]+))\.(?:([a-zA-Z4]{3,6}))$/
 };
 
@@ -68,7 +71,9 @@ var methods = {
       },
       expressions: {
         backRegEx: context.expressions.backRegEx,
-        previewRegEx: context.expressions.previewRegEx
+        previewRegEx: context.expressions.previewRegEx,
+        sampleFileName: context.expressions.sampleFileName,
+        previewKey: context.expressions.previewKey
       },
       recent: [
 
@@ -206,6 +211,12 @@ var methods = {
     }
     if (settings.expressions && settings.expressions.previewRegEx) {
       context.expressions.previewRegEx = settings.expressions.previewRegEx;
+    }
+    if (settings.expressions && settings.expressions.sampleFileName) {
+      context.expressions.sampleFileName = settings.expressions.sampleFileName;
+    }
+    if (settings.expressions && settings.expressions.previewKey) {
+      context.expressions.previewKey = settings.expressions.previewKey;
     }
     if (settings.recent && settings.recent.length > 0) {
         context.recent = [];
@@ -417,7 +428,7 @@ var restMethods = {
 			var tourPreview = context.paths.tours + tour + ".png";
 			var tourJson = context.paths.tours + tour + ".json";
 
-		  var files = fs.readdirSync(tourFolder), i, file;
+		  //var files = fs.readdirSync(tourFolder), i, file;
 
       var output = fs.createWriteStream(tourZip);
 
@@ -563,6 +574,8 @@ var restMethods = {
   findImportableFiles: function(options) {
     var result = {code: 'OK', msgs: [], dir: '', files: []};
 
+    result.previewKey = context.expressions.previewKey;
+
     var tour = options.identifier;
 
     var dir = dialog.showOpenDialog(win, {
@@ -611,7 +624,10 @@ var restMethods = {
     var result = {
       expressions: {
         backRegEx: context.expressions.backRegEx,
-        previewRegEx: context.expressions.previewRegEx
+        previewRegEx: context.expressions.previewRegEx,
+        sampleFileName: context.expressions.sampleFileName,
+        extractFileNameString: commonRegEx.extractFileNameString,
+        previewKey: context.expressions.previewKey
       },
       paths: {tours: context.paths.tours || ''}
     };
@@ -643,6 +659,20 @@ var restMethods = {
     } else {
       result.code = 'FAIL';
     }
+    return result;
+  },
+
+  updateRegExSettings: function(options){
+    var result = {code: 'OK', msgs: []};
+
+    context.expressions.backRegEx = options.backRegEx;
+    context.expressions.previewRegEx = options.previewRegEx;
+    context.expressions.sampleFileName = options.sampleFileName;
+    context.expressions.previewKey = options.previewKey;
+
+    methods.writeSettings();
+    methods.loadFiles();
+
     return result;
   },
 
@@ -701,10 +731,7 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  const menu = defaultMenu(app, shell);
-
-  //console.log(path2);
-  
+  const menu = defaultMenu(app, shell);  
   var i = 0, j;
 
   if (!env.devTools) {
@@ -747,7 +774,9 @@ app.on('ready', () => {
         loadPath: path.join(__dirname, 'locales', '{{lng}}','{{ns}}.json')
       }
     }, function(err, t){
-      console.log(err);
+      if (env.devTools && err) {
+        console.log(err);
+      }
       // Only create the window when the languages are ready
       createWindow();
     });
@@ -780,8 +809,9 @@ app.on('activate', () => {
  * Create the fakeRestCallback
  */
 ipc.on('syncMethod', function(event, arg) {
-  console.log(arg);
-  
+  if (env.devTools) {
+    console.log(arg);
+  }
   var methodName = arg['method'], options = arg['options'];
 
   if (methodName && restMethods[methodName]) {
@@ -792,7 +822,9 @@ ipc.on('syncMethod', function(event, arg) {
 });
 
 ipc.on('asyncMethod', function(event, arg) {
-  console.log(arg);
+  if (env.devTools) {
+    console.log(arg);
+  }
   var methodName = arg['method'], options = arg['options'];
   if (methodName && restMethods[methodName]) {
       event.returnValue = (restMethods[methodName](options, function(result){
