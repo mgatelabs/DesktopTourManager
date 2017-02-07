@@ -11,11 +11,12 @@
 <div>
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist" id="tabList">
-		<li role="presentation" class="active"><a href="#dash" aria-controls="tours" role="tab" dash-link="dash" data-toggle="tab"><span class="glyphicon glyphicon-home">&nbsp;<span i18n-text="page.dash.tabs.dash"><!--Information--></span><!--Dashboard--></a></li>
-		<li role="presentation"><a id="listButton" href="#list" aria-controls="tours" role="tab" data-toggle="tab" dash-link="list"><span class="glyphicon glyphicon-th-list">&nbsp;<span i18n-text="page.dash.tabs.list"><!--Information--></span><!--Dashboard--></a></li>
-		<li role="presentation"><a id="createButton" href="#create" aria-controls="tours" role="tab" data-toggle="tab" dash-link="create"><span class="glyphicon glyphicon-plus">&nbsp;<span i18n-text="page.dash.tabs.create"><!--Information--></span><!--Dashboard--></a></li>
-		<li role="presentation"><a id="settingsButton" href="#settings" aria-controls="tours" role="tab" data-toggle="tab" dash-link="settings"><span class="glyphicon glyphicon-cog">&nbsp;<span i18n-text="page.dash.tabs.settings"><!--Information--></span><!--Dashboard--></a></li>
-		<li role="presentation"><a href="#licenses" aria-controls="tours" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-book">&nbsp;<span i18n-text="page.dash.tabs.licenses"><!--Information--></span><!--Dashboard--></a></li>
+		<li role="presentation" class="active"><a href="#dash" aria-controls="tours" role="tab" dash-link="dash" data-toggle="tab"><span class="glyphicon glyphicon-home">&nbsp;<span i18n-text="page.dash.tabs.dash"><!--Information--></span></a></li>
+		<li role="presentation"><a id="listButton" href="#list" aria-controls="tours" role="tab" data-toggle="tab" dash-link="list"><span class="glyphicon glyphicon-th-list">&nbsp;<span i18n-text="page.dash.tabs.list"><!--Information--></span></a></li>
+		<li role="presentation"><a id="createButton" href="#create" aria-controls="tours" role="tab" data-toggle="tab" dash-link="create"><span class="glyphicon glyphicon-plus">&nbsp;<span i18n-text="page.dash.tabs.create"><!--Information--></span></a></li>
+		<li role="presentation"><a id="settingsButton" href="#settings" aria-controls="tours" role="tab" data-toggle="tab" dash-link="settings"><span class="glyphicon glyphicon-cog">&nbsp;<span i18n-text="page.dash.tabs.settings"><!--Information--></span></a></li>
+		<li role="presentation"><a href="#licenses" aria-controls="tours" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-book">&nbsp;<span i18n-text="page.dash.tabs.licenses"><!--Information--></span></a></li>
+		<li role="presentation"><a href="#about" aria-controls="tours" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-info-sign">&nbsp;<span i18n-text="page.dash.tabs.about"><!--About--></span></a></li>
 	</ul>
 	<!-- Tab panes -->
 	<div class="tab-content">
@@ -91,44 +92,45 @@
 
         <div role="tabpanel" class="tab-pane" id="create"> <!-- Start #create -->
 
-            <div style="margin:2em 0 0 0;padding:0 1em;">
-				<h3>Notes</h3>
-				<p>
-					Before attempting to make a new tour, please collect your images and move them to a location that can be accessed from this machine.  You don’t need to prep the files for use, unless you need to explicitly blur out certain features, such as license plates or phone numbers.
-				</p>
-				<p>
-					Once your new tour has been created, you will have a chance to add files.  Available content comes in three flavors, backgrounds, copy and ignore.  If you select background the system will examine your images and create valid backgrounds with preview images that are appropriate for all iOS devices.  Copy will just add media without making any modifications.  And ignore will simply leave out content.
-				</p>
-			</div>
+            <div class="well well-lg" style="margin:2em;">
 
-			<div style="padding:1em">
-				<div class="input-group" style="margin-bottom:10px;">
-					<span class="input-group-addon">Tour Id</span>
-					<input type="text" class="form-control" id="newTourId" placeholder="Please enter"/>
-					
-				</div>
+                <div style="margin:2em 0 0 0;padding:0 1em;">
+                    <h3 i18n-text="page.create.notes"><!--Notes--></h3>
+                    <p i18n-text="page.create.lines.one">
+                    </p>
+                    <p i18n-text="page.create.lines.two">
+                        
+                    </p>
+                </div>
 
-				<div class="alert alert-info" role="alert">
+                <div style="padding:1em">
+                    <div class="input-group" style="margin-bottom:10px;">
+                        <span class="input-group-addon" i18n-text="page.create.field.id">Tour Id</span>
+                        <input type="text" class="form-control" id="newTourId" placeholder="Please enter"/>
+                        
+                    </div>
 
-					The tour identifier can only be made up of a-z, 0-9 and _
+                    <div class="alert alert-info" role="alert" i18n-text="page.create.info.id">
 
-				</div>
+                    </div>
 
-				<div class="input-group" style="margin-bottom:10px;">
-					<span class="input-group-addon">Tour Name</span>
-					<input type="text" class="form-control" id="newTourName" placeholder="Please enter"/>
+                    <div class="input-group" style="margin-bottom:10px;">
+                        <span class="input-group-addon" i18n-text="page.create.field.name">Tour Name</span>
+                        <input type="text" class="form-control" id="newTourName" placeholder="Please enter"/>
 
-				</div>
+                    </div>
 
-				<div class="alert alert-info" role="alert">
-					The tour name must not start or end with a whitespace character.
-				</div>
+                    <div class="alert alert-info" role="alert" i18n-text="page.create.info.name">
 
-				<div class="input-group-btn">
-					<button type="button" class="btn btn-primary" id="createTour"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;Create Tour</button>
-				</div>
+                    </div>
 
-			</div>
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary" id="createTour"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;<span i18n-text="page.create.action">Create Tour</span></button>
+                    </div>
+
+                </div>
+
+            </div>
 
         </div> <!-- End #create -->
 
@@ -140,16 +142,22 @@
                     <h2 i18n-text="page.settings.titles.paths"><!--Paths--></h2>
 
                     <div class="input-group" style="margin-bottom:10px;">
-                        <span class="input-group-addon" i18n-text="page.settings.location">Tours Location</span>
+                        <span class="input-group-addon" i18n-text="page.settings.location"></span>
                         <input type="text" class="form-control" id="settingPathsTours" readonly placeholder="Path to storage folder"/>
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-primary" id="pickToursLocation"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;Change</button>
+                            <button type="button" class="btn btn-primary" id="pickToursLocation"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;<span i18n-text="page.settings.titles.change"></span></button>
                         </div>
                     </div>
 
                     <div class="alert alert-info" role="alert" i18n-text="page.settings.titles.location">
 
                     </div>
+
+                    <div class="input-group" style="margin-bottom:10px;">
+                        <span class="input-group-addon" i18n-text="page.settings.settings"></span>
+                        <input type="text" class="form-control" id="settingPathsSettings" readonly/>
+                    </div>
+
                 </div>
 
             </div>
@@ -163,6 +171,11 @@
                     <div class="alert alert-info" role="alert" i18n-text="page.settings.titles.regExInfo">
 
                     </div>
+
+                    <div class="alert alert-info open-in-browser" role="alert" url="http://www.w3schools.com/jsref/jsref_obj_regexp.asp" i18n-text="page.settings.titles.learnAboutRegEx">
+
+                    </div>
+
 
                     <div class="input-group" style="margin-bottom:10px;">
                         <span class="input-group-addon" i18n-text="page.settings.regExBack"><!--Background--></span>
@@ -187,7 +200,7 @@
                         <input type="text" class="form-control" id="settingPreviewKey" placeholder="String used to generate preview names"/>
                     </div>
 
-                    <div class="alert alert-info" role="alert" i18n-text="page.settings.titles.previewKey">
+                    <div class="alert alert-info" role="alert" i18n-text="page.settings.titles.sample">
 
                     </div>
 
@@ -196,11 +209,11 @@
                         <input type="text" class="form-control" id="settingExpSample" placeholder="Sample background image name"/>
                     </div>
 
-                    <div class="alert alert-info" role="alert" i18n-text="page.settings.titles.sample">
+                    <div class="alert alert-info" role="alert" i18n-text="page.settings.titles.previewKey">
 
                     </div>
 
-                    <button type="button" class="btn btn-primary" id="updateRegEx"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;Update</button>
+                    <button type="button" class="btn btn-primary" id="updateRegEx"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;<span i18n-text="page.settings.titles.update"></span></button>
                     
                 </div>
 
@@ -456,6 +469,20 @@
 
 		</div> <!-- End #licenses -->
 
+        <div role="tabpanel" class="tab-pane" id="about">
+
+
+            <div class="well well-lg" style="margin:2em;">
+
+                <h1>Dashboard Tour Manager</h1>
+                <h2>By Michael Fuller</h2>
+                <h3>Copyright 2017</h3>
+
+                <div class="open-in-browser" url="https://github.com/mgatelabs/DesktopTourManager" i18n-text="page.dash.source">Source Code</div>
+
+            </div>
+
+        </div> <!-- End #about -->
 
 	</div>
 </div>

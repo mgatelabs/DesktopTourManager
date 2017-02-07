@@ -629,7 +629,10 @@ var restMethods = {
         extractFileNameString: commonRegEx.extractFileNameString,
         previewKey: context.expressions.previewKey
       },
-      paths: {tours: context.paths.tours || ''}
+      paths: {
+        tours: context.paths.tours || '',
+        settings: context.paths.settings
+    }
     };
     if (!context.paths.tours) {
       result.code = 'FAIL';
