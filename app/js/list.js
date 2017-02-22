@@ -60,7 +60,7 @@
                 link.attr('identifier', item.identifier);
                 link.attr('title', i18next.t('page.list.edit', {'name': item.name}));
 
-                $('<td></td>').text(item.name).appendTo(tr);
+                //$('<td></td>').text(item.name).appendTo(tr);
                 $('<td></td>').text(item.identifier).appendTo(tr);
 
                 td = $('<td></td>').appendTo(tr);
