@@ -15,7 +15,8 @@ var Backend = require('i18next-sync-fs-backend');
 global.sharedObject = {
   tour: {
     identifier: undefined
-  }
+  },
+  version: app.getVersion()
 };
 
 

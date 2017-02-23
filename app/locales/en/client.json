@@ -6,13 +6,16 @@
         "settings": "Settings",
         "vfb": "View Facebook Page",
         "vhb": "View Help Videos",
-        "vtw": "View Twitter Feed"
+        "vtw": "View Twitter Feed",
+        "vrd": "View r/mobilevrstation/",
+        "vgh": "View Source Code"
     },
     "title": {
         "app":"Desktop Tour Manager",
-        "dashboard":"Dashboard - $t(title.app)",
-        "import":"Import Media - $t(title.app)",
-        "detail":"Editing - $t(title.app)"
+        "version": "0.1.2",
+        "dashboard":"Dashboard - $t(title.app) - $t(title.version)",
+        "import":"Import Media - $t(title.app) - $t(title.version)",
+        "detail":"Editing - $t(title.app) - $t(title.version)"
     },
     "msgs": {
         "missingFieldValue": "Exception: Please enter {{fieldName}} and try again",

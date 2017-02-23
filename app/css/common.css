@@ -53,6 +53,14 @@ body {
 	background-image: url(../images/yt.png);
 }
 
+.reddit-icon {
+	background-image: url(../images/reddit.png);
+}
+
+.github-icon {
+	background-image: url(../images/github.png);
+}
+
 .open-in-browser {
 	cursor: pointer;
 }

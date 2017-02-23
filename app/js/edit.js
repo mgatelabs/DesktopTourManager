@@ -251,7 +251,7 @@
 
                 } break;
                 case 'UP': {
-                    if (index > 0) {
+                    if (index > 0 && ns.index.json.rooms.length > 1) {
                         ns.moveRoom(index);
                         ns.buildRoomsGrid();
                         ns.selectRoom(index - 1);
@@ -259,7 +259,7 @@
                     }
                 } break;
                 case 'DOWN': {
-                    if (index + 1 < ns.index.json.rooms.length) {
+                    if (index + 1 < ns.index.json.rooms.length && ns.index.json.rooms.length > 1) {
                         ns.moveRoom(index + 1);
                         ns.buildRoomsGrid();
                         ns.selectRoom(index + 1);
@@ -447,14 +447,20 @@
                         MG.warn = true;
                     } break;
                     case 'UP': {
-                        ns.movePoint(index);
-                        ns.updatePointList();
-                        MG.warn = true;
+                        if (ns.currentRoom.points.length > 1 && index > 0) {
+                            ns.movePoint(index);
+                            ns.updatePointList();
+                            ns.selectPoint(index - 1);
+                            MG.warn = true;
+                        }
                     } break;
                     case 'DOWN': {
-                        ns.movePoint(index + 1);
-                        ns.updatePointList();
-                        MG.warn = true;
+                        if (ns.currentRoom.points.length > 1 && index < ns.currentRoom.points.length-1) {
+                            ns.movePoint(index + 1);
+                            ns.updatePointList();
+                            ns.selectPoint(index + 1);
+                            MG.warn = true;
+                        }
                     } break;
                     case 'DELETE': {
                         if (confirm('Delete point, are you sure?')) {
