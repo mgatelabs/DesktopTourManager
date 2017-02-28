@@ -18,6 +18,8 @@ This is still under development, so things may not always work.
 
 1. This uses a image modification library to process images.  The process to install this module was messy and not fun.  The process on the mac was not painful at all, but I have all development tools installed.
 
+2. The tool doesn't like complex file names.  So please avoid undescores, and spaces.  Also the files names will be hidden, so its fine to name stuff like something-very-important.png
+
 # Tips
 
 To change the mac icon, edit the images in ./build/icon.iconset.  From the build folder run the following command:
