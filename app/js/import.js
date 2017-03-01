@@ -50,7 +50,7 @@
                 tr.appendTo(ns.fileBody);
 
                 tr = $('<tr style="display:none;"></tr>').attr('index', i).addClass('errorFile');
-                td = $('<td colspan="6" class="errorDest"></td>').appendTo(tr);
+                td = $('<td colspan="7" class="errorDest"></td>').appendTo(tr);
 
                 tr.appendTo(ns.fileBody);
             }
@@ -147,7 +147,7 @@
                     }
                     ns.nextCommand();
                 } else {
-                    ns.errorAt(temp.index, "Unknown error");
+                    ns.errorAt(temp.index, (result.msgs && result.msgs.length > 0 && result.msgs[0]) || "Unknown error");
                     // Error
                     $('#progress').addClass('progress-bar-danger');
                     ns.processEnded();

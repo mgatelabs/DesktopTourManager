@@ -57,8 +57,8 @@ var commonRegEx = {
   backgroundFileExtensions: /^(png|jpg|jpeg)$/,
   playableFileExtensions: /^(png|jpg|jpeg|mp4|sbs|m4v|mov|mp3|stream|mpo)$/,
   fixFileExtensions: /^(png|jpg|jpeg)$/,
-  extractFileNameString:'^(?:([a-zA-Z0-9-_~]+))\.(?:([a-zA-Z4]{3,6}))$',
-  extractFileName: /^(?:([a-zA-Z0-9-_~]+))\.(?:([a-zA-Z4]{3,6}))$/
+  extractFileNameString:'^(?:([a-zA-Z0-9-_~]+))\.(?:([a-zA-Z34]{3,6}))$',
+  extractFileName: /^(?:([a-zA-Z0-9-_~]+))\.(?:([a-zA-Z34]{3,6}))$/
 };
 
 /**
@@ -509,10 +509,42 @@ var restMethods = {
    * *************************************************************************/
 
   processImportCommand: function(options, callback) {
-    var result = {code: 'OK', msgs: []}, tour = options.identifier, command = options.command, sourcePath, targetPath;
+    var result = {code: 'OK', msgs: []}, tour = options.identifier, command = options.command, sourcePath, targetPath, i, ch;
+
+    if (!command.target) {
+      var result = {code: 'OK', msgs: []};
+      result.code = 'FAIL';
+      result.msgs.push('Missing target name');
+      callback(result);
+      return  result;
+    }
 
     sourcePath = options.dir + command.filename;
     targetPath = context.paths.tours + tour + context.paths.sep + command.target + '.' + command.ext;
+
+  
+
+    for (i = 0; i < command.target.length; i++) {
+      ch = command.target[i];
+      switch (ch) {
+        case '-':
+        case '_':
+        case '~': {
+
+        } break;
+        default: {
+          if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')) {
+            // GOOD
+          } else {
+            var result = {code: 'OK', msgs: []};
+            result.code = 'FAIL';
+            result.msgs.push("Invalid character in target name");
+            callback(result);
+            return  result;
+          }
+        } break;
+      }
+    }
 
     switch (command.type) {
       case 'COPY': {
@@ -590,13 +622,28 @@ var restMethods = {
       result.dir = dir;
 
       // Parse files from folder
-      var mediaFiles = fs.readdirSync(dir), i, file;
+      var mediaFiles = fs.readdirSync(dir), i, j, file, cleaned, ch, lastSince = false;
 
       if (mediaFiles && mediaFiles.length > 0) {
         for (i = 0; i < mediaFiles.length; i++) {
+          cleaned = [];
           file = mediaFiles[i];
-          if (file.match(commonRegEx.extractFileName)) {
-            var nameMatch = commonRegEx.extractFileName.exec(file);
+          for (j = 0; j < file.length; j++) {
+            ch = file[j];
+            if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') || ch == '.' || ch == '_' || ch == '-' || ch == '~') {
+              cleaned.push(ch);
+              lastSince = true;
+            } else {
+              if (lastSince) {
+                cleaned.push('-');
+              }
+              lastSince = false;
+            }
+            // skip bad file names
+          }
+          cleaned = cleaned.join('');
+          if (cleaned.match(commonRegEx.extractFileName)) {
+            var nameMatch = commonRegEx.extractFileName.exec(cleaned);
             if (nameMatch && nameMatch[1] && nameMatch[2]) {
               var name = nameMatch[1], ext = nameMatch[2].toLowerCase();
               if (ext == 'jpeg') {
