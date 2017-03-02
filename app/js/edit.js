@@ -109,7 +109,74 @@
           }
         ],
         Dome: [
-
+          {
+            name: 'Vertical Columns',
+            key: 'cols',
+            type: 'I',
+            min: 8,
+            max: 96,
+            def: 64
+          }, {
+            name: 'Horizontal Rows',
+            key: 'rows',
+            type: 'I',
+            min: 8,
+            max: 96,
+            def: 64
+          },{
+            name: 'Vertical Degree (ARC)',
+            key: 'vdg',
+            type: 'I',
+            min: 1,
+            max: 360,
+            def: 360
+          }, {
+            name: 'Horiozontal Degree (ARC)',
+            key: 'hdg',
+            type: 'I',
+            min: 1,
+            max: 360,
+            def: 180
+          }
+        ],
+        FullDome: [
+            {
+            name: 'Scope',
+            key: 'scope',
+            type: 'F',
+            min: 15,
+            max: 360,
+            step:2.5,
+            def: 180
+          }, {
+            name: 'Vertical Columns',
+            key: 'cols',
+            type: 'I',
+            min: 8,
+            max: 96,
+            def: 64
+          }, {
+            name: 'Horizontal Rows',
+            key: 'rows',
+            type: 'I',
+            min: 8,
+            max: 96,
+            def: 64
+          },{
+            name: 'Pitch',
+            key: 'pitch',
+            type: 'I',
+            min: 0,
+            max: 355,
+            def: 90
+          }, {
+            name: 'Yaw',
+            key: 'yaw',
+            type: 'I',
+            min: 0,
+            max: 355,
+            def: 0
+          }
         ]
     };
 

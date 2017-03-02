@@ -229,17 +229,31 @@ var methods = {
 }());
 
 /**
- * Fake Rest Methods
+ * Rest Methods
  */
 var restMethods = {
-	/** Dasboards **/
+	/****************************************************************************
+   * Dasboards
+   ***************************************************************************/
+  
+  /**
+   * Get the recently edited/viewed tours
+   * Type: SYNC
+   */
   getRecents: function() {
     var result = {recents: context.recent};
     result.code = 'OK';
     return result;
   },
 
-	/** Tour Management **/
+	/****************************************************************************
+   * Tour Management
+   ***************************************************************************/
+
+  /**
+   * List all available tours
+   * Type: SYNC
+   */
   getTours: function() {
     var result = {paths: {tours: context.paths.tours || ''}};
     if (!context.paths.tours) {
@@ -251,6 +265,11 @@ var restMethods = {
     }
     return result;
   },
+
+  /**
+   * Read a tour
+   * Type: SYNC
+   */
   getTourInfo: function(options) {
     var tour = options.identifier, backgroundId, full = !options.minimum;
 
@@ -339,6 +358,11 @@ var restMethods = {
 
     return result;
   },
+
+  /**
+   * Save a tour
+   * Type: SYNC
+   */
   putTourInfo: function(options){
     var result = {code: 'OK', msgs: []};
 
@@ -375,6 +399,11 @@ var restMethods = {
 
     return result;
   },
+
+  /**
+   * Remove a tour
+   * Type: SYNC
+   */
   deleteTour: function(options){
 	var result = {code: 'OK', msgs: []}, tour = options.tourId;
 	
@@ -411,6 +440,11 @@ var restMethods = {
 	}
 	return result;
   },
+
+  /**
+   * Create a zip file from a tour
+   * Type: SYNC
+   */
   zipTour: function(options, callback){
     var result = {code: 'OK', msgs: []}, tour = options.tourId;
 
@@ -451,6 +485,11 @@ var restMethods = {
 
     callback(result);
   },
+
+  /**
+   * Create a new tour
+   * Type: SYNC
+   */
   createTour: function(options){
     var result = {code: 'OK', msgs: []}, tour = options.tourId + '.tour', name = options.tourName;
 
@@ -508,6 +547,10 @@ var restMethods = {
    *  Import
    * *************************************************************************/
 
+  /**
+   * Run a import command and return the 
+   * Type: ASYNC
+   */
   processImportCommand: function(options, callback) {
     var result = {code: 'OK', msgs: []}, tour = options.identifier, command = options.command, sourcePath, targetPath, i, ch;
 
@@ -522,15 +565,14 @@ var restMethods = {
     sourcePath = options.dir + command.filename;
     targetPath = context.paths.tours + tour + context.paths.sep + command.target + '.' + command.ext;
 
-  
-
+    // Verify that the target name is valid
     for (i = 0; i < command.target.length; i++) {
       ch = command.target[i];
       switch (ch) {
         case '-':
         case '_':
         case '~': {
-
+          // GOOD
         } break;
         default: {
           if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')) {
@@ -604,6 +646,10 @@ var restMethods = {
     return result;
   },
 
+  /**
+   * Try to find files you want to import
+   * Type: SYNC
+   */
   findImportableFiles: function(options) {
     var result = {code: 'OK', msgs: [], dir: '', files: []};
 
@@ -630,7 +676,7 @@ var restMethods = {
           file = mediaFiles[i];
           for (j = 0; j < file.length; j++) {
             ch = file[j];
-            if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') || ch == '.' || ch == '_' || ch == '-' || ch == '~') {
+            if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') || ch == '.' || ch == '-' || ch == '~') {
               cleaned.push(ch);
               lastSince = true;
             } else {
@@ -668,6 +714,10 @@ var restMethods = {
    *  Settings
    * *************************************************************************/
   
+  /**
+   * Get settings from AppData
+   * Type: SYNC
+   */
   getSettings: function() {
     var result = {
       expressions: {
@@ -691,20 +741,25 @@ var restMethods = {
     return result;
   },
   
+  /**
+   * Choose where to find tours
+   */
   pickToursLocation: function() {
     var result = {code: 'OK', msgs: []};
 
+    // Show the folder chooser
     var dir = dialog.showOpenDialog(win, {
       properties: ['openDirectory']
     });
+    // Did the select a folder?
     if (dir) {
       if (!(dir[dir.length - 1] == '\\' || dir[dir.length - 1] == '/')) {
         dir += context.paths.sep;
       }
-
+      // Update paths
       context.paths.tours = dir;
       result.dir = dir;
-
+      // Save everything
       methods.writeSettings();
       methods.loadFiles();
     } else {
@@ -713,6 +768,10 @@ var restMethods = {
     return result;
   },
 
+  /**
+   * Save settings to local storage
+   * Type: SYNC
+   */
   updateRegExSettings: function(options){
     var result = {code: 'OK', msgs: []};
 
@@ -728,17 +787,18 @@ var restMethods = {
   },
 
   /****************************************************************************
-   *  TEST
+   *  Make sure Async connections work
    * *************************************************************************/
 
   testAsync: function(option, callback){
-    setInterval(function(){
+    setTimeout(function(){
       callback({code:'OK'});
     }, 2000);
+    return {code:'OK'};
   },
 
   /****************************************************************************
-   *  TEST
+   *  Open An External URL
    * *************************************************************************/
 
   openUrl: function(option, callback){

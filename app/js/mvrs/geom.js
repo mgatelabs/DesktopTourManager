@@ -94,10 +94,37 @@
         return geom;
     }
 
+    /**
+     * Dome Definition
+     */
+
+    MVRS.geom.Dome = function() {
+        MVRS.geom.Base.call(this);
+    }
+
+    MVRS.geom.Dome.prototype = Object.create(MVRS.geom.Base.prototype);
+
+    MVRS.geom.Dome.prototype.init =  function() {
+        this.defaults = [];
+
+        this.defaults.push({key:'cols', name:'Columns', value: 64, min:8, max:96, type:'INT'});
+        this.defaults.push({key:'rows', name:'Rows', value: 64, min:8, max:96, type:'INT'});
+
+        this.defaults.push({key:'vdg', name:'Vertical Degree (ARC)', value: 360, min:1, max:360, type:'INT'});
+        this.defaults.push({key:'ghdg', name:'Horiozontal Degree (ARC)', value: 180, min:1, max:360, type:'INT'});
+    },
+
+    MVRS.geom.Dome.prototype.gen = function(options, widthRatio, heightRatio) {
+        var geom = new THREE.Geometry();
+        // No Preview
+        return geom;
+    }
+
     // Shared Geometry Instances
 
     MVRS.geom.instances = {
-        Plane: new MVRS.geom.Plane()
+        Plane: new MVRS.geom.Plane(),
+        Dome: new MVRS.geom.Dome()
     }
 
 }());
