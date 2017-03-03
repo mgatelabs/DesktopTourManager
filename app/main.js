@@ -11,6 +11,10 @@ var archiver = require('archiver'); // Zipping
 var i18next = require('i18next');
 var Backend = require('i18next-sync-fs-backend');
 
+// Fixes
+
+app.commandLine.appendSwitch('--ignore-gpu-blacklist');
+
 // In the main process.
 global.sharedObject = {
   tour: {

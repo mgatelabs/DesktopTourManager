@@ -63,15 +63,15 @@
 #pointToolbar {
     position: absolute;
     top:10px;
-    left:5px;
-    right: 540px;
+    right:5px;
+    width: 530px;
     height: 40px; 
     overflow: hidden;
 }
 
 #pointGrid {
     position: absolute;
-    top:50px;
+    top:5px;
     left:5px;
     right: 540px;
     bottom: 5px; 
@@ -81,18 +81,17 @@
 
 #previewPanel {
     position: absolute;
-    top:5px;
+    top:50px;
     right:5px;
     width: 530px;
     height: 320px; 
     overflow-x: hidden;
     overflow-y: hidden;
-    
 }
 
 #previewTools {
     position: absolute;
-    top:330px;
+    top:380px;
     right:5px;
     width: 530px;
     bottom: 5px; 

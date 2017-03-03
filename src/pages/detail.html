@@ -125,6 +125,12 @@
 
 				<div id="pointWrap">
 					
+					
+
+					<div id="pointGrid">
+
+					</div>
+
 					<div id="pointToolbar">
 						<div class="btn-toolbar">
 							<div class="btn-group" role="group" aria-label="Rooms">
@@ -143,10 +149,6 @@
 								<button i18n-title="page.detail.action.pointDown" mode="DOWN" type="button" class="btn btn-default"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></button>
 							</div>
 						</div>
-					</div>
-
-					<div id="pointGrid">
-
 					</div>
 
 					<div id="previewPanel">
@@ -263,24 +265,7 @@
 											</div>
 										</div>
 									</div>
-									<!--
-									<div class="panel panel-default">
-										<div class="panel-heading" role="tab" id="headingFour">
-											<h4 class="panel-title">
-											<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-												Point Rotation
-											</a>
-											</h4>
-										</div>
-										<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-											<div class="panel-body">
-											
-												
 
-											</div>
-										</div>
-									</div>
-									-->
 									<div class="panel panel-default">
 										<div class="panel-heading" role="tab" id="headingFive">
 											<h4 class="panel-title">
@@ -309,17 +294,6 @@
 
 								<!-- END -->
 
-						<!--
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">Info</h3>
-							</div>
-							<div class="panel-body">
-
-							
-							</div>
-						</div>
-						-->
 					</div>
 
 				</div>
@@ -378,98 +352,7 @@
 					</div>
 				</div>
 
-				<div class="row" style="margin-top:1em;">
-
-					<div class="col-md-4">
-
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">Preset</h3>
-							</div>
-							<div class="panel-body">
-
-								<div class="form-group">
-									<label for="presetId">Id</label>
-									<input type="text" class="form-control" id="presetId" placeholder="Identifier"/>
-								</div>
-
-								<div class="form-group">
-									<label for="presetProj" title="Plane is a flat image, just imaging a picture frame.  Sphere is for equirectangular/360 content.">Type</label>
-									<select class="form-control" id="presetProj">
-										<option value="Plane">Plane (Flat)</option>
-										<option value="Dome">Dome (180)</option>
-										<option value="FullDome">Full Dome (180)</option>
-										<option value="Sphere">Sphere (360)</option>
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label for="presetMode">Mode</label>
-									<select class="form-control" id="presetMode">
-										<option value="2d">2D</option>
-										<option value="sbs">3D Left / Right</option>
-										<option value="ovr">3D Top / Bottom</option>
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label for="presetFill" title="Adaptive will maintain the aspect ratio, and the max adaptive height/width is applied.  For 360 content, stretch should be used. ">Fill</label>
-									<select class="form-control" id="presetFill">
-										<option value="adapt">Adaptive (Standard)</option>
-										<option value="stretch">Stretch</option>
-										<option value="fit">Fit (Deprecated)</option>
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label for="presetIpd">IPD</label>
-									<select class="form-control" id="presetIpd">
-										<option value="std">Standard</option>
-										<option value="zero">Zero</option>
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label for="presetFlip" title="Used to alter how content is displayed.  Flipped makes 3D content R/L. Force 2D makes all 3D content L/L.">Flip</label>
-									<select class="form-control" id="presetFlip">
-										<option value="off">Off (Standard)</option>
-										<option value="on">On (Flipped)</option>
-										<option value="2d">Force 2D</option>
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label for="presetFilter" title="If your content requires those old style Red/Blue 3D glasses to view, please set it here.">Filter</label>
-									<select class="form-control" id="presetFilter">
-										<option value="off">Off (None)</option>
-										<option value="redcyan">3D Red/Cyan</option>
-										<option value="redblue">3D Red/Blue</option>
-										<option value="redgreen">3D Red/Green</option>
-									</select>
-								</div>
-
-
-							</div>
-						</div>
-
-					</div>
-
-					<div class="col-md-8">
-
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">Attributes</h3>
-							</div>
-							<div class="panel-body" id="presetAttributes">
-
-
-
-							</div>
-						</div>
-
-					</div>
-
-				</div>
+				
 
 			</div>
 
@@ -773,5 +656,121 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Start Preset Editor -->
+	
+	<div class="modal fade" tabindex="-1" role="dialog" id="editPreset">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="exampleModalLabel">Preset Editor</h4>
+				</div>
+				<div class="modal-body">
+					
+					<div class="row" style="margin-top:1em;">
+
+						<div class="col-md-4">
+
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Preset</h3>
+								</div>
+								<div class="panel-body">
+
+									<div class="form-group">
+										<label for="presetId">Id</label>
+										<input type="text" class="form-control" id="presetId" placeholder="Identifier"/>
+									</div>
+
+									<div class="form-group">
+										<label for="presetProj" title="Plane is a flat image, just imaging a picture frame.  Sphere is for equirectangular/360 content.">Type</label>
+										<select class="form-control" id="presetProj">
+											<option value="Plane">Plane (Flat)</option>
+											<option value="Dome">Dome (180)</option>
+											<option value="FullDome">Full Dome (180)</option>
+											<option value="Sphere">Sphere (360)</option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="presetMode">Mode</label>
+										<select class="form-control" id="presetMode">
+											<option value="2d">2D</option>
+											<option value="sbs">3D Left / Right</option>
+											<option value="ovr">3D Top / Bottom</option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="presetFill" title="Adaptive will maintain the aspect ratio, and the max adaptive height/width is applied.  For 360 content, stretch should be used. ">Fill</label>
+										<select class="form-control" id="presetFill">
+											<option value="adapt">Adaptive (Standard)</option>
+											<option value="stretch">Stretch</option>
+											<option value="fit">Fit (Deprecated)</option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="presetIpd">IPD</label>
+										<select class="form-control" id="presetIpd">
+											<option value="std">Standard</option>
+											<option value="zero">Zero</option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="presetFlip" title="Used to alter how content is displayed.  Flipped makes 3D content R/L. Force 2D makes all 3D content L/L.">Flip</label>
+										<select class="form-control" id="presetFlip">
+											<option value="off">Off (Standard)</option>
+											<option value="on">On (Flipped)</option>
+											<option value="2d">Force 2D</option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="presetFilter" title="If your content requires those old style Red/Blue 3D glasses to view, please set it here.">Filter</label>
+										<select class="form-control" id="presetFilter">
+											<option value="off">Off (None)</option>
+											<option value="redcyan">3D Red/Cyan</option>
+											<option value="redblue">3D Red/Blue</option>
+											<option value="redgreen">3D Red/Green</option>
+										</select>
+									</div>
+
+
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-md-8">
+
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Attributes</h3>
+								</div>
+								<div class="panel-body" id="presetAttributes">
+
+
+
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- End Preset Editor -->
+
+
 
 <!-- /build:content -->

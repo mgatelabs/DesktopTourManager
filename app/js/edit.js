@@ -450,7 +450,6 @@
 
 
         // Point List
-        //ns.pointBody = $('#pointTable tbody');
         ns.pointGrid = $('#pointGrid');
 
         $('#pointToolbar').on('click', '[mode]', function(){
@@ -764,8 +763,6 @@
         ns.listBody = $('#listTable tbody');
 
         // Preset List
-
-        // Point List
         ns.presetBody = $('#presetTable tbody');
 
         ns.presetBody.on('click', 'tr td button[mode]', function(){
@@ -773,6 +770,7 @@
             switch (mode) {
                 case 'EDIT': {
                     ns.selectPreset(index);
+                    $('#editPreset').modal();
                 } break;
                 case 'UP': {
                     ns.movePreset(index);
@@ -1253,69 +1251,6 @@
             }
 
             div.append(img).append(span).append(span2).appendTo(container);
-
-            /*
-            tr = $('<tr></tr>').appendTo(ns.pointBody);
-            tr.attr('point', i);
-            if (i == ns.currentPointIndex) {
-                tr.addClass('selected');
-            }
-
-            // Title
-            $('<td></td>').text(item.title).appendTo(tr);
-
-            // Type
-            td = $('<td></td>').appendTo(tr);
-            switch (item.type) {
-                case 'rot': {
-                    td.text('Rotation (Y:'+(item.yaw || 0)+',P:'+(item.pitch || 0)+',D:'+(item.depth || 1.5)+',S:'+(item.size || 1.0)+')');
-                } break;
-                case 'point': {
-                    td.text('Point');
-                } break;
-                case 'action': {
-                    td.text('Action');
-                } break;
-            }
-
-            // Action
-            td = $('<td></td>').appendTo(tr);
-            switch (item.action) {
-                case 'nav': {
-                    td.text('Navigate To ' + (ns.roomMap[item.to] || 'Unknown') + ' (' + (item.to || 'Undefined') + ')');
-                } break;
-                case 'stop': {
-                    td.text('Stop Tour');
-                } break;
-                case 'exit': {
-                    td.text('Exit VR');
-                } break;
-                case 'play': {
-                    td.text('Play (' + (item.content || 'Unknown') + ')');
-                } break;
-            }
-
-            // Options
-            td = $('<td></td>').appendTo(tr);
-
-            link = $('<button type="button" style="margin-right:4px;" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'EDIT').appendTo(td);
-
-            link = $('<button type="button" style="margin-right:4px;" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'skip').appendTo(td);
-            if (i > 0) {
-                link.attr('mode', 'UP');
-            } else {
-                link.prop('disabled', true);
-            }
-
-            link = $('<button type="button" style="margin-right:4px;" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'skip').appendTo(td);
-            if (i < ns.currentRoom.points.length - 1) {
-                link.attr('mode', 'DOWN');
-            } else {
-                link.prop('disabled', true);
-            }
-
-            link = $('<button type="button" style="margin-right:4px;" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'DELETE').appendTo(td);
-            */
         }
     };
 
@@ -1470,7 +1405,7 @@
             }
 
             link = $('<button type="button" style="margin-right:4px;" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'skip').appendTo(td);
-            if (i < ns.index.json.rooms.length - 1) {
+            if (i < ns.index.json.presets.length - 1) {
                 link.attr('mode', 'DOWN');
             } else {
                 link.prop('disabled', true);

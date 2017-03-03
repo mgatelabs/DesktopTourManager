@@ -327,25 +327,27 @@
 
                 var yaw = 180;
 
-                self.background.mesh.rotation.x = 0;
-                self.background.mesh.rotation.y = 0;
-                self.background.mesh.rotation.z = 0;
+                if (self.background.mesh) {
+                    self.background.mesh.rotation.x = 0;
+                    self.background.mesh.rotation.y = 0;
+                    self.background.mesh.rotation.z = 0;
 
-                if (room) {
-                    if (room.world && room.world.yaw) {
-                        yaw = 180 + (room.world.yaw - 0);
-                        //console.log(yaw);
-                        self.background.mesh.rotation.x = 0;
+                    if (room) {
+                        if (room.world && room.world.yaw) {
+                            yaw = 180 + (room.world.yaw - 0);
+                            //console.log(yaw);
+                            self.background.mesh.rotation.x = 0;
 
-                        self.background.mesh.rotation.z = 0;
-                    } else {
-                        self.background.mesh.rotation.x = 0;
-                        self.background.mesh.rotation.z = 0;
+                            self.background.mesh.rotation.z = 0;
+                        } else {
+                            self.background.mesh.rotation.x = 0;
+                            self.background.mesh.rotation.z = 0;
+                        }
                     }
+
+                    self.background.mesh.rotation.y = THREE.Math.degToRad(yaw);
                 }
-
-                self.background.mesh.rotation.y = THREE.Math.degToRad(yaw);
-
+            
                 self.update();
             }
         },
