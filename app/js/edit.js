@@ -193,6 +193,7 @@
     ns.newRoomBtn = undefined,
 
     ns.onSelectBackgroundFunction = undefined;
+    ns.lastSelectedRoomIndex = undefined;
     ns.lastSelectedBackgroundIndex = undefined;
 
     ns.onSelectRoomFunction = undefined;
@@ -234,6 +235,7 @@
         $('.roomEditAction').click(function(){
             var ref = $(this), index = ns.currentRoomIndex, isGlobal = $(this).is('.roomGlobalAction'), mode = ref.attr('mode');
             if (!isGlobal && index == -1) {
+                alert('Please select a room first');
                 return;
             }
             switch (mode) {
@@ -290,7 +292,6 @@
                         ns.lastSelectedBackgroundIndex = index;
                         $('#newRoomInfo').modal('show');
                     }
-
                     $('#selectBackground').modal();
                 } break;
                 case 'REFRESH': {
@@ -332,6 +333,12 @@
                         ns.selectRoom(index + 1);
                         MG.warn = true;
                     }
+                } break;
+                case 'COPY': {
+                    ns.lastSelectedRoomIndex = index;
+                    $('#copyRoomId').val(ns.index.json.rooms[index].id);
+                    $('#copyRoomName').val(ns.index.json.rooms[index].title);
+                    $('#copyRoomInfo').modal('show');
                 } break;
                 case 'DELETE': {
                     if (confirm('Delete room, are you sure?')) {
@@ -447,13 +454,53 @@
             }
         });
 
+        ns.copyRoomBtn = $('#copyRoom').click(function(){
+            var newRoomId = $('#copyRoomId'), newRoomName = $('#copyRoomName'), roomId = $.trim(newRoomId.val()), roomName = $.trim(newRoomName.val());
+            if (roomId) {
+                for (i = 0; i < ns.index.json.rooms.length; i++) {
+                    item = ns.index.json.rooms[i];
+                    if (item.id == roomId) {
+                        alert('Room with matching identifier already exists');
+                        return;
+                    }
+                }
+                $('#copyRoomInfo').modal('hide');
 
+                ns.deSelectRoom();
+
+                var source = ns.index.json.rooms[ns.lastSelectedRoomIndex], copyTo, sourcePoint, copyPoint;
+
+                copyTo = {"id":roomId, "title":roomName, background: source.background, "content":source.content, "preview":source.preview, "points":[], "world":$.extend(true, {}, source.world)};
+
+                for (i = 0; i < source.points.length; i++) {
+                    sourcePoint = source.points[i];
+                    copyPoint = $.extend(true, {}, sourcePoint);
+                    copyTo.points.push(copyPoint);
+                }
+
+                ns.index.json.rooms.push(copyTo);
+
+                ns.buildRoomsGrid();
+                ns.updatePointToList();
+
+                ns.selectRoom(ns.index.json.rooms.length - 1);
+				
+				// Clean up
+				newRoomId.val('');
+				newRoomName.val('');
+                MG.warn = true;
+            }
+        });
 
         // Point List
         ns.pointGrid = $('#pointGrid');
 
         $('#pointToolbar').on('click', '[mode]', function(){
             var ref = $(this), index, newIndex, mode = ref.attr('mode');
+            if (ns.currentRoomIndex == -1) {
+                alert('Please select a room first');
+                return;
+            }
             if (ns.currentPointIndex != -1 || ref.is('[global]')) {
                 index = ns.currentPointIndex;
 
@@ -763,63 +810,79 @@
         ns.listBody = $('#listTable tbody');
 
         // Preset List
-        ns.presetBody = $('#presetTable tbody');
+        ns.presetGrid = $('#presetGrid');
 
-        ns.presetBody.on('click', 'tr td button[mode]', function(){
-            var ref = $(this), index = ref.attr('index') - 0, mode = ref.attr('mode'), dat;
-            switch (mode) {
-                case 'EDIT': {
-                    ns.selectPreset(index);
-                    $('#editPreset').modal();
-                } break;
-                case 'UP': {
-                    ns.movePreset(index);
-                    ns.updatePresetList();
-                    MG.warn = true;
-                } break;
-                case 'DOWN': {
-                    ns.movePreset(index + 1);
-                    ns.updatePresetList();
-                    MG.warn = true;
-                } break;
-                case 'DELETE': {
-                    if (confirm('Delete preset, are you sure?')) {
-                        ns.deletePreset(index);
-                        ns.updatePresetList();
-                        MG.warn = true;
-                    }
-                } break;
-                case 'COPY': {
-                    var presetId = prompt("Preset identifier:");
-                    if (presetId) {
-                        for (i = 0; i < ns.index.json.presets.length; i++) {
-                            item = ns.index.json.presets[i];
-                            if (item.name == presetId) {
-                                alert('Preset with matching identifier already exists');
-                                return;
-                            }
-                        }
-                        ns.deSelectRoom();
-                        ns.deSelectPoint();
-                        ns.deSelectPreset();
-
-                        dat = $.extend(true, {}, ns.index.json.presets[index], {name: presetId});
-
-                        ns.index.json.presets.push(dat);
-
-                        ns.updatePresetList();
-                        ns.updatePresetToList();
-                        ns.selectPreset(ns.index.json.presets.length - 1);
-
-                        MG.warn = true;
-                    }
-                } break;
-            }
+        ns.presetGrid.on('click', 'div.presetItem', function(){
+            var ref = $(this), index = ref.attr('index') - 0;
+            ns.selectPreset(index);
         });
 
-        $('#newPreset').click(function(){
-            $("#newPresetId").val('');
-            $('#newPresetInfo').modal('show');
+        $('#presetControls').on('click', '[mode]', function(){
+            var ref = $(this), index, mode = ref.attr('mode'), dat;
+            if (ns.currentPresetIndex != -1 || ref.is('[global]')) {
+                index = ns.currentPresetIndex;
+                switch (mode) {
+                    case 'NEW': {
+                        $("#newPresetId").val('');
+                        $('#newPresetInfo').modal('show');
+                    } break;
+                    case 'COPY': {
+                        $('#copyPresetId').val(ns.index.json.presets[index].name);
+                        $('#copyPresetInfo').modal('show');
+                    } break;
+                    case 'EDIT': {
+                        $('#editPreset').modal();
+                    } break;
+                    case 'UP': {
+                        if (ns.index.json.presets.length > 1 && index > 0) {
+                        ns.movePreset(index);
+                        ns.updatePresetList();
+                        ns.selectPreset(index - 1);
+                        MG.warn = true;
+                        }
+                    } break;
+                    case 'DOWN': {
+                        if (ns.index.json.presets.length > 1 && index < ns.index.json.presets.length-1) {
+                        ns.movePreset(index + 1);
+                        ns.updatePresetList();
+                        ns.selectPreset(index + 1);
+                        MG.warn = true;
+                        }
+                    } break;
+                    case 'DELETE': {
+                        if (confirm('Delete preset, are you sure?')) {
+                            ns.deletePreset(index);
+                            ns.updatePresetList();
+                            MG.warn = true;
+                        }
+                    } break;
+                    case 'COPY': {
+                        var presetId = prompt("Preset identifier:");
+                        if (presetId) {
+                            for (i = 0; i < ns.index.json.presets.length; i++) {
+                                item = ns.index.json.presets[i];
+                                if (item.name == presetId) {
+                                    alert('Preset with matching identifier already exists');
+                                    return;
+                                }
+                            }
+                            ns.deSelectRoom();
+                            ns.deSelectPoint();
+                            ns.deSelectPreset();
+
+                            dat = $.extend(true, {}, ns.index.json.presets[index], {name: presetId});
+
+                            ns.index.json.presets.push(dat);
+
+                            ns.updatePresetList();
+                            ns.updatePresetToList();
+                            ns.selectPreset(ns.index.json.presets.length - 1);
+
+                            MG.warn = true;
+                        }
+                    } break;
+                }
+            }
         });
 
         $('#newPresetAction').click(function(){
@@ -842,6 +905,34 @@
                 ns.updatePresetToList();
                 ns.selectPreset(ns.index.json.presets.length - 1);
                 $('#newPresetInfo').modal('hide');
+                MG.warn = true;
+            }
+        });
+
+        ns.copyPresetBtn = $('#copyPresetAction').click(function(){
+            var presetId = $("#copyPresetId").val();
+            if (presetId) {
+                for (i = 0; i < ns.index.json.presets.length; i++) {
+                    item = ns.index.json.presets[i];
+                    if (item.name == presetId) {
+                        alert('Preset with matching identifier already exists');
+                        return;
+                    }
+                }
+                var source = ns.index.json.presets[ns.currentPresetIndex], target = $.extend(true, {}, source);
+
+                target.name = presetId;
+
+                ns.deSelectRoom();
+                ns.deSelectPoint();
+                ns.deSelectPreset();
+
+                ns.index.json.presets.push(target);
+
+                ns.updatePresetList();
+                ns.updatePresetToList();
+                ns.selectPreset(ns.index.json.presets.length - 1);
+                $('#copyPresetInfo').modal('hide');
                 MG.warn = true;
             }
         });
@@ -1217,7 +1308,7 @@
                 div.addClass('selected');
             }
 
-            if (item.action == 'nav') {
+            if (item.action == 'nav' && item.to && ns.roomMap[item.to]) {
                 room = ns.roomMap[item.to];
                 if (room.preview) {
                     img.attr('src', ns.folder + room.preview);
@@ -1225,11 +1316,15 @@
                     img.attr('src', './images/nopreview.png');
                 }
             } else if (item.action == 'action') {
-                img.attr('src', './images/nopreview.png');
+                img.attr('src', './images/action.png');
             } else if (item.action == 'play') {
-                img.attr('src', './images/nopreview.png');
+                img.attr('src', './images/play.png');
+            } else if (item.action == 'exit') {
+                img.attr('src', './images/exit.png');
+            } else if (item.action == 'stop') {
+                img.attr('src', './images/stop.png');
             } else {
-                img.attr('src', './images/nopreview.png');
+                img.attr('src', './images/noop.png');
             }
 
             switch (item.action) {
@@ -1385,35 +1480,23 @@
      */
 
     ns.updatePresetList = function() {
-        var i, item, tr, td, link;
-        ns.presetBody.empty();
+        var i, item, div, img, span, container = ns.presetGrid;
+        container.empty();
+
         for (i = 0; i < ns.index.json.presets.length; i++) {
             item = ns.index.json.presets[i];
-            tr = $('<tr></tr>').appendTo(ns.presetBody);
-            $('<td></td>').text(item.name).appendTo(tr);
-            $('<td></td>').text(item.proj).appendTo(tr);
-            td = $('<td></td>').appendTo(tr);
 
-            link = $('<button type="button" style="margin-right:4px;" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'EDIT').appendTo(td);
+            div = $('<div class="presetItem"></div>').data('item', item).attr('index', i).attr('presetId', item.id);
+            span = $('<span class="presetTitle"></span>').text(item.name);
+            img = $('<img class="img-thumbnail">');
 
-
-            link = $('<button type="button" style="margin-right:4px;" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'skip').appendTo(td);
-            if (i > 0) {
-                link.attr('mode', 'UP');
-            } else {
-                link.prop('disabled', true);
+            if (ns.currentPresetIndex == i) {
+                div.addClass('selected');
             }
 
-            link = $('<button type="button" style="margin-right:4px;" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'skip').appendTo(td);
-            if (i < ns.index.json.presets.length - 1) {
-                link.attr('mode', 'DOWN');
-            } else {
-                link.prop('disabled', true);
-            }
-
-            link = $('<button type="button" style="margin-right:4px;" class="btn btn-default btn-xs" title="Delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'DELETE').appendTo(td);
-
-            link = $('<button type="button" style="margin-right:4px;" class="btn btn-default btn-xs" title="Copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></button>').attr('index', i).attr('mode', 'COPY').appendTo(td);
+            img.attr('src', './images/geom_'+item.proj+'.png');
+            
+            div.append(img).append(span).appendTo(container);
         }
     };
 
@@ -1421,10 +1504,18 @@
 
         ns.currentPreset = ns.index.json.presets[presetIndex];
 
+        ns.currentPresetIndex = presetIndex;
+
         // Integrity
         if (!ns.currentPreset.settings) {
             ns.currentPreset.settings = {};
         }
+
+        var items = ns.presetGrid.find('div.presetItem[index]').removeClass('selected');
+
+        var cell = items.filter('div.presetItem[index=' + presetIndex + ']');
+
+        cell.addClass('selected');
 
         ns.presetId.val(ns.currentPreset.name);
         ns.presetProj.prop('disabled', false).val(ns.currentPreset.proj || 'Plane');
@@ -1450,6 +1541,10 @@
     },
 
     ns.deSelectPreset = function(){
+
+        if (ns.currentPresetIndex != -1) {
+            ns.presetGrid.find('div.presetItem[index='+ns.currentPresetIndex+']').removeClass('selected');
+        }
 
         ns.currentPreset = undefined;
 
@@ -1524,7 +1619,7 @@
             item = ns.files[i];
             tr = $('<tr></tr>').appendTo(ns.fileBody);
             $('<td></td>').text(item.name).appendTo(tr);
-            $('<td></td>').text(item.json.display || 'Untitled').appendTo(tr);
+            $('<td></td>').text(item.key || 'Untitled').appendTo(tr);
             $('<td></td>').text(item.preview).appendTo(tr);
             td = $('<td></td>').appendTo(tr);
 

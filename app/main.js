@@ -269,7 +269,7 @@ var restMethods = {
     }
     return result;
   },
-
+  
   /**
    * Read a tour
    * Type: SYNC
@@ -302,30 +302,33 @@ var restMethods = {
     if (mediaFiles && mediaFiles.length > 0) {
       for (i = 0; i < mediaFiles.length; i++) {
         file = mediaFiles[i];
+
         if (file.match(commonRegEx.mediaFileName)) {
-            var mediaJsonPath = tourFolder + file + '.json';
-            var mediaPreviewPath = tourFolder + file + '.png';
-
-            var mediaItem = {};
-
+            var mediaJsonPath = tourFolder + file + '.json',
+                mediaPreviewPath = tourFolder + file + '.png',
+                mediaItem = {};
+            
+            mediaItem.key = file;
             mediaItem.type = 'MEDIA';
             mediaItem.name = file;
             mediaItem.preview = fs.existsSync(mediaPreviewPath);
             mediaItem.json = methods.readJson(mediaJsonPath, {display: file});
 
+            var backgroundMatch = backgroundRegEx.exec(file);
+            if (backgroundMatch && backgroundMatch[1]) {
+              backgroundId = backgroundMatch[1];
+              mediaItem.key = backgroundId;
+              methods.addKeyTo(backgroundId, 'content', file, backgroundLinker, result.backgrounds);
+            }
+
+            backgroundMatch = previewRegEx.exec(file);
+            if (backgroundMatch && backgroundMatch[1]) {
+              backgroundId = backgroundMatch[1];
+              mediaItem.key = backgroundId;
+              methods.addKeyTo(backgroundId, 'preview', file, backgroundLinker, result.backgrounds);
+            }
+
             result.files.push(mediaItem);
-        }
-
-        var backgroundMatch = backgroundRegEx.exec(file);
-        if (backgroundMatch && backgroundMatch[1]) {
-          backgroundId = backgroundMatch[1];
-          methods.addKeyTo(backgroundId, 'content', file, backgroundLinker, result.backgrounds);
-        }
-
-        backgroundMatch = previewRegEx.exec(file);
-        if (backgroundMatch && backgroundMatch[1]) {
-          backgroundId = backgroundMatch[1];
-          methods.addKeyTo(backgroundId, 'preview', file, backgroundLinker, result.backgrounds);
         }
       }
     }
@@ -362,7 +365,7 @@ var restMethods = {
 
     return result;
   },
-
+  
   /**
    * Save a tour
    * Type: SYNC
@@ -403,7 +406,7 @@ var restMethods = {
 
     return result;
   },
-
+  
   /**
    * Remove a tour
    * Type: SYNC
@@ -444,7 +447,7 @@ var restMethods = {
 	}
 	return result;
   },
-
+  
   /**
    * Create a zip file from a tour
    * Type: SYNC
@@ -489,7 +492,7 @@ var restMethods = {
 
     callback(result);
   },
-
+  
   /**
    * Create a new tour
    * Type: SYNC
@@ -559,7 +562,7 @@ var restMethods = {
     var result = {code: 'OK', msgs: []}, tour = options.identifier, command = options.command, sourcePath, targetPath, i, ch;
 
     if (!command.target) {
-      var result = {code: 'OK', msgs: []};
+      result = {code: 'OK', msgs: []};
       result.code = 'FAIL';
       result.msgs.push('Missing target name');
       callback(result);
@@ -582,7 +585,7 @@ var restMethods = {
           if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')) {
             // GOOD
           } else {
-            var result = {code: 'OK', msgs: []};
+            result = {code: 'OK', msgs: []};
             result.code = 'FAIL';
             result.msgs.push("Invalid character in target name");
             callback(result);

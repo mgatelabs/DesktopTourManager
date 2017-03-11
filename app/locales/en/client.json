@@ -12,7 +12,7 @@
     },
     "title": {
         "app":"Desktop Tour Manager",
-        "version": "0.1.3",
+        "version": "0.1.5",
         "dashboard":"Dashboard - $t(title.app) - $t(title.version)",
         "import":"Import Media - $t(title.app) - $t(title.version)",
         "detail":"Editing - $t(title.app) - $t(title.version)"
@@ -127,10 +127,13 @@
                 "addMissing":"Automaticlaly add missing rooms.  If you just added more files, hit this to fill in new content.",
                 "refreshRooms":"Refresh the information below",
                 "addExits":"Automatically add exits to every room",
-                "addRoom":"Add a new empty room",
-                "deleteRoom":"Delete the current room",
-                "upRoom":"Move the current room up",
-                "downRoom":"Move the current room down",
+                
+                "roomNew":"Add a new empty room",
+                "roomCopy":"Copy the current room",
+                "roomDelete":"Delete the current room",
+                "roomUp":"Move the current room up",
+                "roomDown":"Move the current room down",
+                
                 "change": "Change",
                 "changeTitle": "Change the currently selected rooms background and preview image.",
             
@@ -138,11 +141,18 @@
                 "pointNextRoom": "Goto Next Room",
                 "pointLinkRoom": "Link Rooms, creates a two way link",
                 "pointToRoom": "To Room, creates a one way link",
-                "pointNew": "New Point, empty point, has no purpose yet",
+                "pointNew": "New Point (empty)",
                 "pointEdit": "Edit Point",
                 "pointDelete": "Delete Point",
                 "pointUp": "Move Point Up",
-                "pointDown": "Move Point Down"
+                "pointDown": "Move Point Down",
+
+                "presetNew": "New Preset",
+                "presetCopy": "Clone Preset",
+                "presetEdit": "Edit Preset",
+                "presetDelete": "Delete Preset",
+                "presetUp": "Move Preset Up",
+                "presetDown": "Move Preset Down"
             },
             "field": {
                 "roomIdentity":"Identity",

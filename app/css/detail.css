@@ -1,5 +1,6 @@
 #roomWrap,
-#pointWrap {
+#pointWrap,
+#presetWrap {
     position: absolute;
     top:40px;
     left:0;
@@ -7,24 +8,43 @@
     bottom: 0;
 }
 
+#roomControls {
+    position: absolute;
+    top:5px;
+    right:5px;
+    width: 370px;
+    bottom: 5px;
+}
+
 #roomGrid {
     position: absolute;
     top:5px;
     left:5px;
-    right: 340px;
+    right: 380px;
     bottom: 5px; 
     overflow-x: hidden;
     overflow-y: scroll;
 }
 
-#roomControls {
+#presetControls {
     position: absolute;
     top:5px;
+    left: 5px;
     right:5px;
-    width: 330px;
-    bottom: 5px;
+    height: 50px;
 }
 
+#presetGrid {
+    position: absolute;
+    top:55px;
+    left:5px;
+    right: 5px;
+    bottom: 5px; 
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.presetItem,
 .roomItem {
     display: inline-block;
     position: relative;
@@ -34,10 +54,12 @@
 }
 
 .roomItem.selected .roomTitle,
-.pointItem.selected .pointTitle {
+.pointItem.selected .pointTitle,
+.presetItem.selected .presetTitle {
     background-color: gold;
 }
 
+.presetItem .presetTitle,
 .roomItem .roomTitle {
     position: absolute;
     left:10px;
@@ -49,6 +71,7 @@
     border-radius: 5px;
 }
 
+.presetItem:hover .presetTitle,
 .roomItem:hover .roomTitle {
     background-color: gray;
 }
