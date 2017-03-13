@@ -12,13 +12,23 @@ This is still under development, so things may not always work.
 
 # Releasing
 
-1. From the source directory, run "npm run release"
+## Windows
+
+1. From the source directory, run "npm run prerelease"
+1. From the app directory, run "npm run package-win"
+
+## Mac
+
+1. From the source directory, run "npm run prerelease"
+2. From the app directory, run "npm run package-mac"
+3. From the app directory, run "npm run package-mac2"
+4. From the app directory, run "npm run package-mac3"
 
 # Issues
 
-1. This uses a image modification library to process images.  The process to install this module was messy and not fun.  The process on the mac was not painful at all, but I have all development tools installed.
+## Build
 
-2. The tool doesn't like complex file names.  So please avoid undescores, and spaces.  Also the files names will be hidden, so its fine to name stuff like something-very-important.png
+1. This uses a image modification library to process images.  The process to install this module was messy and not fun.  The process on the mac was not painful at all, but I have all development tools installed.
 
 # Tips
 
